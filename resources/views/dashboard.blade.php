@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('js/jquery.dataTables.min.css') }}">
     <style>
         .bg-utama{
-        background-image: url("/img/bg1.jfif");
+        background-image: url("/img/login.jpg");
         background-size: cover;
         background-position: center;
         height: 100%;
