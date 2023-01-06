@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
 
-                <div class="section-title">Anggota <a href="/{{ auth()->user()->role }}/anggota/create"
+                <div class="section-title">Data User <a href="/{{ auth()->user()->role }}/user/create"
                         class="btn btn-sm btn-warning float-right">Tambah Data</a></div>
                 <section class="section">
 
@@ -20,25 +20,25 @@
                                     <th scope="col">Username</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Created At</th>
+                                    <th scope="col">Akses</th>
 
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $row)
+                                @foreach ($data as $row)
 
                                 <tr>
                                     <td>{{ $row->no_anggota }}</td>
                                     <td>{{ $row->username }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->email }}</td>
-                                    <td>{{ $row->created_at }}</td>
+                                    <td>{{ $row->role }}</td>
 
                                     <td>
-                                        <a href="/{{ auth()->user()->role }}/anggota/{{ $row->id }}/edit"
+                                        <a href="/{{ auth()->user()->role }}/user/{{ $row->id }}/edit"
                                             class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                        <a href="/admin/anggota/{{ $row->id }}/destroy"
+                                        <a href="/admin/user/{{ $row->id }}/destroy"
                                             onclick="return confirm('Anda yakin ingin menghapus data ini?')"
                                             class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     </td>
@@ -53,54 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-
-                <div class="section-title">Admin
-                    </div>
-                <section class="section">
-
-                    <div class="table-responsive">
-
-                        <table class="table table-sm" id="datatable1">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Created At</th>
-
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($admin as $row)
-
-                                <tr>
-                                    <th scope="row">{{ $row->username }}</th>
-                                    <th scope="row">{{ $row->name }}</th>
-                                    <td>{{ $row->email }}</td>
-                                    <td>{{ $row->created_at }}</td>
-
-                                    <td>
-                                        <a href="/{{ auth()->user()->role }}/anggota/{{ $row->id }}/edit"
-                                            class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                        <a href="/admin/anggota/{{ $row->id }}/destroy"
-                                            onclick="return confirm('Anda yakin ingin menghapus data ini?')"
-                                            class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 @endsection

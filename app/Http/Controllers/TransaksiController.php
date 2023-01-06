@@ -24,11 +24,15 @@ class TransaksiController extends Controller
     public function index()
     {
 
-        if(Auth::user()->role=='admin'){
+        if(auth()->user()->role=='admin'||auth()->user()->role=='kaperpus'){
+
             $transaksi=Transaksi::all();
+        }else{
+            $transaksi=Transaksi::where('user_id',auth()->user()->id)->get();
+        }
 
 
-                $transaksi1=DB::table('transaksi')->whereNotExists(function($query){
+       $transaksi1=DB::table('transaksi')->whereNotExists(function($query){
                     $query->select(DB::raw(1))
                     ->from('notifikasi')
                     ->whereColumn('transaksi.id','notifikasi.transaksi_id');
@@ -61,12 +65,7 @@ class TransaksiController extends Controller
                 // dd($row);
 
 
-                }
-
-        }else{
-
-            $transaksi=Transaksi::where('user_id',Auth::user()->id)->get();
-        }
+                }   
 
         $tglsekarang=date('d', strtotime(now()));
         $blnsekarang=date('m', strtotime(now()));
@@ -128,7 +127,7 @@ class TransaksiController extends Controller
         $data->status='Dipinjam';
         $data->ket=$request->ket;
         $data->save();
-        return redirect()->route('transaksi.index')->with('sukses','Data Berhasil Ditambah');
+        return redirect('/'.auth()->user()->role.'/transaksi')->route('transaksi.index')->with('sukses','Data Berhasil Ditambah');
     }
 
     /**
@@ -170,7 +169,7 @@ class TransaksiController extends Controller
             'jumlah_buku'=>$stokbukuberkurang
         ]);
         $data->update(['status'=>'Dikembalikan']);
-        return redirect('/admin/transaksi')->with('sukses','Data Berhasil Diubah');
+        return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Diubah');
     }
 
     /**
@@ -184,15 +183,15 @@ class TransaksiController extends Controller
         $data=Transaksi::find($id);
         $notif=Notifikasi::where('transaksi_id',$id)->delete();
         $data->delete();
-        return redirect('/admin/transaksi')->with('sukses','Data Berhasil Dihapus');
+        return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Dihapus');
     }
-
+// 
     public function transaksibaru()
     {
         $buku=Buku::orderBy('id','desc')->get();
         $datenow=date('Y-m-d', strtotime(now()));
         // dd($datenow);
-        $anggota=User::where('role','user')->get();
+        $anggota=User::all();
         return view('transaksi.create',compact('buku','anggota','datenow'));
     }
 

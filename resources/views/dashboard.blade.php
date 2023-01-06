@@ -111,9 +111,9 @@
                             </div>
                             @endif
                         </div>
+                        @if(Auth()->user()->role=='admin')
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            @if(Auth()->user()->role=='admin')
-                            <a href="/admin/anggota">
+                            
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-danger">
                                     <i class="far fa-user"></i>
@@ -127,23 +127,8 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
-                            @else
-                            <div class="card card-statistic-1">
-                                <div class="card-icon bg-danger">
-                                    <i class="far fa-user"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Total Anggota</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        {{ $anggota }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
                         </div>
+                        
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-success">
@@ -159,6 +144,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </section>
             </div>

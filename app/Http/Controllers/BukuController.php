@@ -74,7 +74,7 @@ class BukuController extends Controller
             $data->save();
         }
         // Buku::create($request->all());
-        return redirect('/admin/buku')->with('sukses','Data Berhasil Ditambahkan');
+        return redirect('/'.auth()->user()->role.'/buku')->with('sukses','Data Berhasil Ditambahkan');
     }
 
     /**
@@ -148,7 +148,7 @@ class BukuController extends Controller
         }
 
 
-        return redirect('/admin/buku')->with('sukses','Data Berhasil Ditambahkan');
+        return redirect('/'.auth()->user()->role.'/buku')->with('sukses','Data Berhasil Diupdate');
     }
 
     /**
@@ -202,7 +202,7 @@ class BukuController extends Controller
         ]);
         $transaksi->save();
 
-        return redirect('/admin/transaksi')->with('sukses','Data Berhasil Ditambahkan');
+        return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Ditambahkan');
     }
 
     public function detail($id)

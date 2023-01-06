@@ -64,7 +64,7 @@ class AuthController extends Controller
                     $query->select(DB::raw(1))
                     ->from('notifikasi')
                     ->whereColumn('transaksi.id','notifikasi.transaksi_id');
-                })
+                })  
                 ->get();
 
 
@@ -95,6 +95,121 @@ class AuthController extends Controller
 
 
                 return redirect(route('dashboard.user'));
+            } elseif (auth()->user()->role == 'kaperpus') {
+
+                // $transaksi=Transaksi::where('status','Terlambat')->get();
+               $transaksi=DB::table('transaksi')->whereNotExists(function($query){
+                   $query->select(DB::raw(1))
+                   ->from('notifikasi')
+                   ->whereColumn('transaksi.id','notifikasi.transaksi_id');
+               })  
+               ->get();
+
+
+               foreach($transaksi as $row){
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=1;
+
+                       $data->save();
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=$row->user_id;
+                       $data->save();
+
+
+               // dd($row);
+
+
+               }
+
+
+               return redirect(route('dashboard.kaperpus'));
+           
+           } elseif (auth()->user()->role == 'siswa') {
+
+                // $transaksi=Transaksi::where('status','Terlambat')->get();
+               $transaksi=DB::table('transaksi')->whereNotExists(function($query){
+                   $query->select(DB::raw(1))
+                   ->from('notifikasi')
+                   ->whereColumn('transaksi.id','notifikasi.transaksi_id');
+               })  
+               ->get();
+
+
+               foreach($transaksi as $row){
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=1;
+
+                       $data->save();
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=$row->user_id;
+                       $data->save();
+
+
+               // dd($row);
+
+
+               }
+
+
+               return redirect(route('dashboard.siswa'));
+            } elseif (auth()->user()->role == 'guru') {
+
+                // $transaksi=Transaksi::where('status','Terlambat')->get();
+               $transaksi=DB::table('transaksi')->whereNotExists(function($query){
+                   $query->select(DB::raw(1))
+                   ->from('notifikasi')
+                   ->whereColumn('transaksi.id','notifikasi.transaksi_id');
+               })  
+               ->get();
+
+
+               foreach($transaksi as $row){
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=1;
+
+                       $data->save();
+
+                       $data=new Notifikasi;
+                       $data->transaksi_id=$row->id;
+                       $data->status='0';
+                       $data->user_id=$row->user_id;
+                       $data->buku_id=$row->buku_id;
+                       $data->sendto=$row->user_id;
+                       $data->save();
+
+
+               // dd($row);
+
+
+               }
+
+
+               return redirect(route('dashboard.guru'));
             }
         } else {
             return redirect('/')->with('error','');

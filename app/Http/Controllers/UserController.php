@@ -16,9 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user=User::where('role','user')->orderBy('id','desc')->get();
-        $admin=User::where('role','admin')->orderBy('id','desc')->get();
-        return view('user.index',compact('user','admin'));
+        $data=User::all();
+        return view('user.index',compact('data'));
     }
 
     /**
@@ -57,13 +56,13 @@ class UserController extends Controller
         $data->nohp=$request->nohp;
         $data->name=$request->name;
         $data->username=$request->username;
-        $data->role='user';
+        $data->role=$request->role;
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
 
 
         $data->save();
-        return redirect()->route('anggota.index')->with('sukses','Data Berhasil Disimpan');
+        return redirect()->route('user.index')->with('sukses','Data Berhasil Disimpan');
     }
 
     /**
@@ -111,7 +110,7 @@ class UserController extends Controller
         }else{
             $data->update(['jk'=>$request->jk,'nohp'=>$request->nohp,'name'=>$request->name]);
         }
-        return redirect()->route('anggota.index')->with('sukses','Data Berhasil Diperbarui');
+        return redirect()->route('user.index')->with('sukses','Data Berhasil Diperbarui');
     }
 
     /**
@@ -131,6 +130,6 @@ class UserController extends Controller
             }
         $transaksi=Transaksi::where('user_id',$id)->delete();
         $data->delete();
-        return redirect()->route('anggota.index')->with('sukses','Data Berhasil Dihapus');
+        return redirect()->route('user.index')->with('sukses','Data Berhasil Dihapus');
     }
 }

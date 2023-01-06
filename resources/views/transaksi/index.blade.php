@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-body">
         <div class="section-title">Transaksi
-            @if (Auth::user()->role=='admin')
+            @if (Auth::user()->role=='admin'||auth()->user()->role=='kaperpus')
 
             <a href="/{{ auth()->user()->role }}/transaksi/create" class="btn btn-sm btn-warning float-right">Transaksi Baru</a>
             @endif
@@ -26,12 +26,12 @@
                         <tr>
                             {{-- <th>ID Transaksi</th> --}}
                             <th scope="col">Nomor Anggota</th>
-                            <th scope="col">Peminjam</th>
-                            <th scope="col">IdBuku</th>
+                            <th scope="col">Nama Peminjam</th>
+                            <th scope="col">Kode Buku</th>
                             <th scope="col">Tgl Pinjam</th>
                             <th scope="col">Tgl Kembali</th>
                             <th scope="col">Status</th>
-                            @if (Auth::user()->role=='admin')
+                            @if (Auth::user()->role=='admin' ||auth()->user()->role=='kaperpus')
                             <th scope="col">Action</th>
                             @endif
                         </tr>
@@ -53,7 +53,7 @@
                             @elseif($row->status=='Terlambat')
                             <td><span class="badge badge-danger">{{ $row->status }}</span></td>
                             @endif
-                            @if (Auth::user()->role=='admin')
+                            @if (Auth::user()->role=='admin' ||auth()->user()->role=='kaperpus')
                             <td>
                                 <div class="btn-group mb-2">
                                     <button class="btn btn-info btn-sm dropdown-toggle" type="button"
@@ -63,12 +63,12 @@
                                     <div class="dropdown-menu" x-placement="bottom-start"
                                         style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 29px, 0px);">
                                         @if ($row->status!='Kembali')
-                                        <a href="/admin/transaksi/{{ $row->id }}/update"
+                                        <a href="/{{ auth()->user()->role }}/transaksi/{{ $row->id }}/update"
                                             class="dropdown-item btn-sm">Dikembalikan</a>
                                         @endif
 
 
-                                        <a href="/admin/transaksi/{{ $row->id }}/destroy" class="dropdown-item btn-sm"
+                                        <a href="/{{ auth()->user()->role }}/transaksi/{{ $row->id }}/destroy" class="dropdown-item btn-sm"
                                             onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
 
 

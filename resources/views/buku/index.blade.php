@@ -6,7 +6,7 @@
     <div class="card-body">
 
         <div class="section-title">Buku
-            @if (Auth::user()->role=='admin')
+            @if (Auth::user()->role=='admin' || Auth::user()->role=='kaperpus' )
 
             <a href="/{{ auth()->user()->role }}/buku/create" class="btn btn-sm btn-warning float-right">Tambah Data</a>
             @endif
@@ -26,7 +26,7 @@
                             <th scope="col">Stok</th>
                             <th scope="col">Rak</th>
 
-                            @if(Auth::user()->role=='admin')
+                            @if(Auth::user()->role=='admin'||Auth::user()->role=='kaperpus')
                             <th style="width: 50px">Action</th>
                             @endif
                         </tr>
@@ -49,7 +49,7 @@
                             <td>{{ $row->tahun_terbit }}</td>
                             <td>{{ $row->jumlah_buku }}</td>
                             <td>{{ $row->lokasi }}</td>
-                            @if (Auth::user()->role=='admin')
+                            @if (Auth::user()->role=='admin'||Auth::user()->role=='kaperpus')
                             <td>
                                 {{-- <a href="/admin/buku/{{ $row->id }}/pinjam" class="btn btn-icon btn-sm btn-primary" title="Pinjam Buku"><i class="fas fa-book"></i></a> --}}
                                 <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/edit" class="btn btn-icon btn-sm btn-warning" title="Edit Buku"><i class="far fa-edit"></i></a>

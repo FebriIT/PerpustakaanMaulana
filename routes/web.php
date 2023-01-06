@@ -42,12 +42,12 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin');
     Route::resource('buku', BukuController::class);
-    Route::get('anggota', [UserController::class,'index'])->name('anggota.index');
-    Route::get('anggota/{id}/destroy', [UserController::class,'destroy'])->name('anggota.destroy');
-    Route::get('anggota/create', [UserController::class,'create']);
-    Route::post('anggota/store', [UserController::class,'store'])->name('user.store');
-    Route::get('anggota/{id}/edit', [UserController::class,'edit']);
-    Route::post('anggota/{id}/update', [UserController::class,'update'])->name('user.update');
+    Route::get('user', [UserController::class,'index'])->name('user.index');
+    Route::get('user/{id}/destroy', [UserController::class,'destroy'])->name('user.destroy');
+    Route::get('user/create', [UserController::class,'create']);
+    Route::post('user/store', [UserController::class,'store'])->name('user.store');
+    Route::get('user/{id}/edit', [UserController::class,'edit']);
+    Route::post('user/{id}/update', [UserController::class,'update'])->name('user.update');
     // Route::resource('petugas',[], UserController::class);
     // Route::resource('transaksi', TransaksiController::class);
 
@@ -71,14 +71,6 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::post('/laporanbuku/download',[LaporanController::class,'dwbuku'] );
     Route::post('/laporantransaksi/download',[LaporanController::class,'dwtransaksi'] );
 
-    // Route::get('/kategori',[KategoriController::class,'index']);
-    // Route::get('/kategori/create',[KategoriController::class,'create']);
-    // Route::post('/kategori/store',[KategoriController::class,'store'])->name('kategori.store');
-    // Route::get('/kategori/{id}/destroy',[KategoriController::class,'destroy'])->name('kategori.destroy');
-    // Route::get('/kategori/{id}/edit',[KategoriController::class,'edit']);
-    // Route::put('/kategori/{id}/update',[KategoriController::class,'update'])->name('kategori.update');
-    // Route::post('/peminjaman/store',[BukuController::class,'pinjamstore'])->name('peminjaman.store');
-
 
     Route::get('/notifikasi/viewall',[NotifikasiController::class,'viewall']);
     Route::get('/marknotif',[NotifikasiController::class,'marknotif']);
@@ -93,10 +85,10 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
 
 
 
-Route::prefix('user')->middleware('auth', 'role:user')->group(function () {
+Route::prefix('siswa')->middleware('auth', 'role:siswa')->group(function () {
     Route::get('/transaksi/{id}',[NotifikasiController::class,'viewnotif']);
     // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.user');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.siswa');
     Route::get('/buku',[BukuController::class,'index']);
     Route::resource('transaksi', TransaksiController::class);
 
@@ -112,10 +104,43 @@ Route::prefix('user')->middleware('auth', 'role:user')->group(function () {
     Route::get('/anggota/{no_anggota}/detail',[AnggotaController::class,'detail']);
     Route::get('/buku/{id}/detail',[BukuController::class,'detail']);
 
-    //  Route::get('/laporananggota', [LaporanController::class,'laporananggota']);
-    // Route::get('/laporanbuku', [LaporanController::class,'laporanbuku']);
-    // Route::get('/laporantransaksi', [LaporanController::class,'laporantransaksi']);
-    // Route::post('/laporananggota/download',[LaporanController::class,'dwanggota'] );
-    // Route::post('/laporanbuku/download',[LaporanController::class,'dwbuku'] );
-    // Route::post('/laporantransaksi/download',[LaporanController::class,'dwtransaksi'] );
 });
+Route::prefix('guru')->middleware('auth', 'role:guru')->group(function () {
+    Route::get('/transaksi/{id}',[NotifikasiController::class,'viewnotif']);
+    // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.guru');
+    Route::get('/buku',[BukuController::class,'index']);
+    Route::resource('transaksi', TransaksiController::class);
+
+
+    Route::get('/profile',[ProfileController::class,'index']);
+    Route::post('/profile/update',[ProfileController::class,'update']);
+
+
+
+    Route::get('/notifikasi/viewall',[NotifikasiController::class,'viewall']);
+    Route::get('/marknotif',[NotifikasiController::class,'marknotif']);
+
+    Route::get('/anggota/{no_anggota}/detail',[AnggotaController::class,'detail']);
+    Route::get('/buku/{id}/detail',[BukuController::class,'detail']);
+
+});
+Route::prefix('kaperpus')->middleware('auth', 'role:kaperpus')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.kaperpus');
+    Route::resource('buku', BukuController::class);
+    Route::get('/buku/{id}/detail',[BukuController::class,'detail']);
+
+    Route::post('/buku/peminjaman/store', [BukuController::class,'pinjamstore']);
+
+    Route::get('/transaksi', [TransaksiController::class,'index']);
+    Route::get('/transaksi/{id}/update', [TransaksiController::class,'update']);
+    Route::get('/transaksi/{id}/destroy', [TransaksiController::class,'destroy']);
+    Route::get('/transaksi/create',[TransaksiController::class,'transaksibaru']);
+
+    Route::get('/laporanbuku', [LaporanController::class,'laporanbuku']);
+    Route::get('/laporantransaksi', [LaporanController::class,'laporantransaksi']);
+    
+    Route::post('/laporanbuku/download',[LaporanController::class,'dwbuku'] );
+    Route::post('/laporantransaksi/download',[LaporanController::class,'dwtransaksi'] );
+});
+

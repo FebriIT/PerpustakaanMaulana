@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>Tambah Anggota</h4>
+        <h4>Tambah User</h4>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -48,6 +48,18 @@
                         <input type="email" name="email" class="form-control" required>
                     </div>
                     
+
+                    <div class="form-group">
+                        <label>Akses</label>
+                        <select class="form-control" name="role" required>
+                            <option value="">-Pilih-</option>
+                            <option value="admin">Admin</option>
+                            <option value="kaperpus">Kepala Perpustakaan</option>
+                            <option value="guru">Guru</option>
+                            <option value="siswa">Siswa</option>
+                        </select>
+                    </div>
+                    
                     <div class="form-group">
                         <label>Username</label>
                         <input type="text" name="username" class="form-control" required>
@@ -59,7 +71,7 @@
                 </div>
             </div>
 
-            <a href="/{{ auth()->user()->role }}/anggota" class="btn btn-warning ">Kembali</a>
+            <a href="/{{ auth()->user()->role }}/user" class="btn btn-warning ">Kembali</a>
             <button type="reset" class="btn btn-danger">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Simpan</button>
         </form>

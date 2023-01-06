@@ -25,6 +25,7 @@ class NotifikasiController extends Controller
     }
     public function viewnotif($id)
     {
+        dd($id);
         Notifikasi::find($id)->update([
             'status'=>1
         ]);

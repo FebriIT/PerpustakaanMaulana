@@ -13,8 +13,13 @@ class DashboardController extends Controller
     public function index()
     {
         $buku=Buku::all()->count();
+        if(auth()->user()->role=='admin'||auth()->user()->role=='kaperpus'){
 
-        $transaksi=Transaksi::all()->count();
+            $transaksi=Transaksi::all()->count();
+        }else{
+            $transaksi=Transaksi::where('user_id',auth()->user()->id)->count();
+
+        }
         $user=User::all()->count();
         $anggota=User::where('role','user')->count();
         // dd($anggota);

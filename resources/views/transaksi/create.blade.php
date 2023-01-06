@@ -119,7 +119,7 @@
                             @foreach ($anggota as $row)
                             <tr class="pilihanggota" idanggota="{{ $row->id }}" namaanggota="{{ $row->name }}" noanggota="{{ $row->no_anggota }}" nohp="{{ $row->nohp }}">
                                 <th scope="row">{{ $row->no_anggota }}</th>
-                                <th>{{ $row->akses }}</th>
+                                <th>{{ $row->role }}</th>
                                 <td><a href="#"> {{ $row->name }}</a></td>
                                 <td>{{ $row->email }}</td>
                             </tr>

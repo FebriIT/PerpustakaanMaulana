@@ -5,8 +5,8 @@
      <div class="card-header">
         <h4>Laporan Transaksi</h4>
     </div>
-    <div class="card-body">
-        <form action="/admin/laporantransaksi/download" enctype="multipart/form-data" method="POST">
+    <div class="card-body"> 
+        <form action="/{{ auth()->user()->role }}/laporantransaksi/download" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="row">
                 <div class="col-6">
