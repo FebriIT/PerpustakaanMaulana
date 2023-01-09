@@ -16,10 +16,8 @@
         </div>
     @endif
     <div class="card-body">
-        <form action="{{ route('buku.update',$data->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="/{{ auth()->user()->role }}/buku/{{ $data->id }}/update" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- @method('put') --}}
-            {{ method_field('put') }}
             <div class="form-group">
                 <label>Judul</label>
                 <input type="text" name="judul" class="form-control col-6" value="{{ $data->judul }}">

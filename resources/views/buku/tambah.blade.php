@@ -16,8 +16,12 @@
         </div>
     @endif
     <div class="card-body">
-        <form action="{{ route('buku.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="/{{ auth()->user()->role }}/buku/simpan" method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="form-group">
+                <label>Kode Buku</label>
+                <input type="text" name="kode_buku" class="form-control col-6" required>
+            </div>
             <div class="form-group">
                 <label>Judul</label>
                 <input type="text" name="judul" class="form-control col-6" required>

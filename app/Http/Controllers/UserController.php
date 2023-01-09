@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Guru;
+use App\Models\Kaperpus;
+use App\Models\Siswa;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,10 +44,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'name' => 'required|max:50',
-            'no_anggota'=>'unique:users,no_anggota|max:11',
-            'username'=>'required|unique:users,username|max:11',
+            'no_anggota'=>'unique:users,no_anggota|max:50',
+            'username'=>'required|unique:users|max:50',
             'email' => 'required|email|unique:users|max:20',
             'nohp' => 'required|max:13',
             'username'=>'required|max:15'
@@ -60,6 +65,36 @@ class UserController extends Controller
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
 
+        if($request->role=='admin'){
+            $admin=new Admin;
+            $admin->kode_anggota=$request->no_anggota;
+            $admin->nama=$request->name;
+            $admin->nohp=$request->nohp;
+            $admin->jk=$request->jk;
+            $admin->save();
+        }elseif($request->role=='kaperpus'){
+            $kaperpus=new Kaperpus();
+            $kaperpus->kode_anggota=$request->no_anggota;
+            $kaperpus->nama=$request->name;
+            $kaperpus->nohp=$request->nohp;
+            $kaperpus->jk=$request->jk;
+            $kaperpus->save();
+        }elseif($request->role=='guru'){
+            $guru=new Guru();
+            $guru->kode_anggota=$request->no_anggota;
+            $guru->nama=$request->name;
+            $guru->nohp=$request->nohp;
+            $guru->jk=$request->jk;
+            $guru->save();
+        }elseif($request->role=='siswa'){
+            $siswa=new Siswa();
+            $siswa->kode_anggota=$request->no_anggota;
+            $siswa->nama=$request->name;
+            $siswa->nohp=$request->nohp;
+            $siswa->jk=$request->jk;
+            $siswa->save();
+        }
+        
 
         $data->save();
         return redirect()->route('user.index')->with('sukses','Data Berhasil Disimpan');
@@ -129,6 +164,7 @@ class UserController extends Controller
                 Storage::delete($image);
             }
         $transaksi=Transaksi::where('user_id',$id)->delete();
+        
         $data->delete();
         return redirect()->route('user.index')->with('sukses','Data Berhasil Dihapus');
     }

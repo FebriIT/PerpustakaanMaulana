@@ -19,8 +19,8 @@
                     <thead>
                         <tr>
                             <th>Pict</th>
+                            <th scope="col">Kode Buku</th>
                             <th scope="col">Judul</th>
-                            <th scope="col">IdBuku</th>
                             <th scope="col">Pengarang</th>
                             <th scope="col">Tahun</th>
                             <th scope="col">Stok</th>
@@ -42,25 +42,28 @@
                             @endif
 
                             </td>
+                            <td>{{ $row->kode_buku }}</td>
                             <td>{{ $row->judul }}</td>
-                            <td><a href="/{{ Auth::user()->role }}/buku/{{ $row->id }}/detail">{{ $row->id }}</a></td>
 
                             <td>{{ $row->pengarang }}</td>
                             <td>{{ $row->tahun_terbit }}</td>
                             <td>{{ $row->jumlah_buku }}</td>
                             <td>{{ $row->lokasi }}</td>
-                            @if (Auth::user()->role=='admin'||Auth::user()->role=='kaperpus')
                             <td>
+                                @if (Auth::user()->role=='admin'||Auth::user()->role=='kaperpus')
                                 {{-- <a href="/admin/buku/{{ $row->id }}/pinjam" class="btn btn-icon btn-sm btn-primary" title="Pinjam Buku"><i class="fas fa-book"></i></a> --}}
-                                <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/edit" class="btn btn-icon btn-sm btn-warning" title="Edit Buku"><i class="far fa-edit"></i></a>
-                                <form action="{{ route('buku.destroy', $row->id) }}"  method="post">
-                                    {{ csrf_field() }}
-                                    {{ method_field('delete') }}
-                                    <button onclick="return confirm('Anda yakin ingin meghapus data buku?')" title="Hapus buku" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-                                </form>
+                                    <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/edit" class="btn btn-icon btn-sm btn-warning" title="Edit Buku"><i class="far fa-edit"></i></a>
+                                    <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/delete" class="btn btn-icon btn-sm btn-danger" onclick="return(confirm('Apakah anda yakin inggin menghapus data ini?'))" title="Edit Buku"><i class="fas fa-trash"></i></a>
+                                    <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/detail" class="btn btn-icon btn-sm btn-primary" title="Edit Buku"><i class="far fa-open"></i></a>
+                                    
+                               
+                                    @else
+                                    <a href="/{{ Auth::user()->role }}/buku/{{ $row->id }}/detail">{{ $row->id }}</a>
 
+                                
+                                @endif
                             </td>
-                            @endif
+                            
                         </tr>
                         @endforeach
 

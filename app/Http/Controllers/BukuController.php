@@ -46,6 +46,7 @@ class BukuController extends Controller
     {
         $this->validate($request, [
             'judul' => 'required|max:255',
+            'kode_buku'=>'unique:buku,kode_buku|max:25',
             'isbn'=>'unique:buku,isbn|max:25',
             'pengarang'=>'required|max:50',
             'penerbit' => 'required|max:50',
@@ -55,6 +56,7 @@ class BukuController extends Controller
 
         ]);
         $data=new Buku;
+        $data->kode_buku=$request->kode_buku;
         $data->judul=$request->judul;
         $data->isbn=$request->isbn;
         $data->pengarang=$request->pengarang;
@@ -172,7 +174,7 @@ class BukuController extends Controller
             Storage::delete($syarat);
         }
         $buku->delete();
-        return redirect()->route('buku.index')->with('sukses','Data Berhasil Ditambahkan');
+        return redirect('/'.auth()->user()->role.'/buku')->with('sukses','Data Berhasil Ditambahkan');
     }
 
     public function pinjam($id)

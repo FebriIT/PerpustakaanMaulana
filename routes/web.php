@@ -41,7 +41,6 @@ Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.admin');
-    Route::resource('buku', BukuController::class);
     Route::get('user', [UserController::class,'index'])->name('user.index');
     Route::get('user/{id}/destroy', [UserController::class,'destroy'])->name('user.destroy');
     Route::get('user/create', [UserController::class,'create']);
@@ -50,6 +49,13 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::post('user/{id}/update', [UserController::class,'update'])->name('user.update');
     // Route::resource('petugas',[], UserController::class);
     // Route::resource('transaksi', TransaksiController::class);
+    // Route::resource('buku', BukuController::class);
+    Route::get('/buku',[BukuController::class,'index']);
+    Route::get('/buku/{id}/edit',[BukuController::class,'edit']);
+    Route::post('/buku/{d}/update',[BukuController::class,'update']);
+    Route::get('/buku/{id}/delete',[BukuController::class,'destroy']);
+    Route::get('/buku/create',[BukuController::class,'create']);
+    Route::post('/buku/simpan',[BukuController::class,'store']);
 
     Route::get('/transaksi', [TransaksiController::class,'index']);
     Route::get('/transaksi/{id}/update', [TransaksiController::class,'update']);
@@ -127,7 +133,14 @@ Route::prefix('guru')->middleware('auth', 'role:guru')->group(function () {
 });
 Route::prefix('kaperpus')->middleware('auth', 'role:kaperpus')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.kaperpus');
-    Route::resource('buku', BukuController::class);
+    
+    Route::get('/buku',[BukuController::class,'index']);
+    Route::get('/buku/{id}/edit',[BukuController::class,'edit']);
+    Route::post('/buku/{d}/update',[BukuController::class,'update']);
+    Route::get('/buku/{id}/delete',[BukuController::class,'destroy']);
+    Route::get('/buku/create',[BukuController::class,'create']);
+    Route::post('/buku/simpan',[BukuController::class,'store']);
+
     Route::get('/buku/{id}/detail',[BukuController::class,'detail']);
 
     Route::post('/buku/peminjaman/store', [BukuController::class,'pinjamstore']);
