@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>Tambah User</h4>
+        <h4>Tambah Admin</h4>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -49,7 +49,7 @@
                     </div>
                     
 
-                    <div class="form-group">
+                    {{--  <div class="form-group">
                         <label>Akses</label>
                         <select class="form-control" name="role" required>
                             <option value="">-Pilih-</option>
@@ -58,7 +58,7 @@
                             <option value="guru">Guru</option>
                             <option value="siswa">Siswa</option>
                         </select>
-                    </div>
+                    </div>  --}}
                     
                     <div class="form-group">
                         <label>Username</label>

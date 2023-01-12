@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data=User::all();
+        $data=User::where('role','admin')->get();
         return view('user.index',compact('data'));
     }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->validate($request, [
             'name' => 'required|max:50',
             'no_anggota'=>'unique:users,no_anggota|max:50',
@@ -61,41 +61,11 @@ class UserController extends Controller
         $data->nohp=$request->nohp;
         $data->name=$request->name;
         $data->username=$request->username;
-        $data->role=$request->role;
+        $data->role='admin';
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
 
-        if($request->role=='admin'){
-            $admin=new Admin;
-            $admin->kode_anggota=$request->no_anggota;
-            $admin->nama=$request->name;
-            $admin->nohp=$request->nohp;
-            $admin->jk=$request->jk;
-            $admin->save();
-        }elseif($request->role=='kaperpus'){
-            $kaperpus=new Kaperpus();
-            $kaperpus->kode_anggota=$request->no_anggota;
-            $kaperpus->nama=$request->name;
-            $kaperpus->nohp=$request->nohp;
-            $kaperpus->jk=$request->jk;
-            $kaperpus->save();
-        }elseif($request->role=='guru'){
-            $guru=new Guru();
-            $guru->kode_anggota=$request->no_anggota;
-            $guru->nama=$request->name;
-            $guru->nohp=$request->nohp;
-            $guru->jk=$request->jk;
-            $guru->save();
-        }elseif($request->role=='siswa'){
-            $siswa=new Siswa();
-            $siswa->kode_anggota=$request->no_anggota;
-            $siswa->nama=$request->name;
-            $siswa->nohp=$request->nohp;
-            $siswa->jk=$request->jk;
-            $siswa->save();
-        }
         
-
         $data->save();
         return redirect()->route('user.index')->with('sukses','Data Berhasil Disimpan');
     }
