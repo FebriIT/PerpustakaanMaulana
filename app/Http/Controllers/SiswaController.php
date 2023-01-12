@@ -55,7 +55,7 @@ class SiswaController extends Controller
         $guru->tgl_lahir=$request->tgl_lahir;
         $guru->save();
         $data->save();
-        return redirect('/admin/siswa')->with('sukses','Data Berhasil Disimpan');
+        return redirect('/admin/user')->with('sukses','Data Berhasil Disimpan');
     }
 
     public function edit($id)
@@ -78,7 +78,7 @@ class SiswaController extends Controller
             'alamat'=>$request->alamat,
         ]);
 
-        return redirect('/admin/siswa')->with('sukses','Data Berhasil Diperbarui');
+        return redirect('/admin/user')->with('sukses','Data Berhasil Diperbarui');
     }
 
     public function destroy($id)
@@ -90,6 +90,6 @@ class SiswaController extends Controller
         
         $data->delete();
         $guru->delete();
-        return redirect('/admin/siswa')->with('sukses','Data Berhasil Dihapus');
+        return redirect('/admin/user')->with('sukses','Data Berhasil Dihapus');
     }
 }

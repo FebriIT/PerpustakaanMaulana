@@ -54,7 +54,7 @@ class GuruController extends Controller
         $guru->jk=$request->jk;
         $guru->save();
         $data->save();
-        return redirect('/admin/guru')->with('sukses','Data Berhasil Disimpan');
+        return redirect('/admin/user')->with('sukses','Data Berhasil Disimpan');
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class GuruController extends Controller
             'jk'=>$request->jk,
         ]);
 
-        return redirect('/admin/guru')->with('sukses','Data Berhasil Diperbarui');
+        return redirect('/admin/user')->with('sukses','Data Berhasil Diperbarui');
     }
 
     public function destroy($id)

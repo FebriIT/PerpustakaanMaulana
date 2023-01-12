@@ -21,7 +21,10 @@ class UserController extends Controller
     public function index()
     {
         $data=User::where('role','admin')->get();
-        return view('user.index',compact('data'));
+        $siswa=Siswa::all();
+        $guru=Guru::all();
+        $kaperpus=Kaperpus::all();
+        return view('user.index',compact('data','siswa','guru','kaperpus'));
     }
 
     /**

@@ -10,9 +10,9 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Kelola Data</span></a>
                 <ul class="dropdown-menu">
                     {{--  <li class="{{ (request()->is('admin/admin')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/admin">Data Admin</a></li>  --}}
-                    <li class="{{ (request()->is('admin/kaperpus')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/kaperpus">Data Kepala Perpustakaan </a></li>
+                    {{--  <li class="{{ (request()->is('admin/kaperpus')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/kaperpus">Data Kepala Perpustakaan </a></li>
                     <li class="{{ (request()->is('admin/guru')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/guru">Data Guru</a></li>
-                    <li class="{{ (request()->is('admin/siswa')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/siswa">Data Siswa</a></li>
+                    <li class="{{ (request()->is('admin/siswa')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/siswa">Data Siswa</a></li>  --}}
                     <li class="{{ (request()->is('admin/user')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/user">Data User</a></li>
                     <li class="{{ (request()->is('admin/buku')) ? 'active' : '' }}"><a class="nav-link" href="/admin/buku">Data Buku</a></li>
                 </ul>
