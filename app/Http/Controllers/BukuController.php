@@ -195,6 +195,7 @@ class BukuController extends Controller
         $transaksi->tgl_pinjam=$datenow;
         $transaksi->tgl_kembali=$req->tgl_kembali;
         $transaksi->status='Dipinjam';
+        $transaksi->kode_transaksi=$req->kode_transaksi;
         //kondisi stok buku berkurang
         $buku=Buku::find($req->buku_id);
 

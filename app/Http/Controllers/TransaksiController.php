@@ -115,6 +115,13 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
+        $this->validate($request, [
+            
+            'kode_transaksi'=>'unique:transaksi,kode_transaksi|max:50',
+           
+
+        ]);
         $data= new Transaksi;
         $data->kode_transaksi=$request->kode_transaksi;
         $data->anggota_id=$request->anggota_id;
@@ -122,6 +129,7 @@ class TransaksiController extends Controller
         // $data->kategori_id=$request->kategori_id;
         $data->tgl_pinjam=$request->tgl_pinjam;
         $data->tgl_kembali=$request->tgl_kembali;
+        $data->kode_transaksi=$request->kode_transaksi;
 
 
         $data->status='Dipinjam';

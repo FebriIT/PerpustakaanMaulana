@@ -9,5 +9,5 @@ class Kaperpus extends Model
 {
     use HasFactory;
     protected $table='kepala_perpustakaan';
-    protected $fillable=['kode_anggota','nama','jk','nohp'];
+    protected $fillable=['kode_anggota','nama','jk','nohp','umur','tgl_lahir','nip'];
 }

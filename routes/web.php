@@ -5,11 +5,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GuruController;
+use App\Http\Controllers\KaperpusController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LaporanTransaksiController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Models\Transaksi;
@@ -47,6 +50,29 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::post('user/store', [UserController::class,'store'])->name('user.store');
     Route::get('user/{id}/edit', [UserController::class,'edit']);
     Route::post('user/{id}/update', [UserController::class,'update'])->name('user.update');
+
+    Route::get('/guru',[GuruController::class,'index']);
+    Route::get('/guru/create',[GuruController::class,'create']);
+    Route::post('guru/store', [GuruController::class,'store'])->name('guru.store');
+    Route::get('guru/{id}/edit', [GuruController::class,'edit']);
+    Route::post('guru/{id}/update', [GuruController::class,'update'])->name('guru.update');
+    Route::get('guru/{id}/destroy', [GuruController::class,'destroy']);
+
+
+    Route::get('/siswa',[SiswaController::class,'index']);
+    Route::get('/siswa/create',[SiswaController::class,'create']);
+    Route::post('siswa/store', [SiswaController::class,'store'])->name('siswa.store');
+    Route::get('siswa/{id}/edit', [SiswaController::class,'edit']);
+    Route::post('siswa/{id}/update', [SiswaController::class,'update'])->name('siswa.update');
+    Route::get('siswa/{id}/destroy', [SiswaController::class,'destroy']);
+
+    Route::get('/kaperpus',[KaperpusController::class,'index']);
+    Route::get('/kaperpus/create',[KaperpusController::class,'create']);
+    Route::post('kaperpus/store', [KaperpusController::class,'store'])->name('kaperpus.store');
+    Route::get('kaperpus/{id}/edit', [KaperpusController::class,'edit']);
+    Route::post('kaperpus/{id}/update', [KaperpusController::class,'update'])->name('kaperpus.update');
+    Route::get('kaperpus/{id}/destroy', [KaperpusController::class,'destroy']);
+    
     // Route::resource('petugas',[], UserController::class);
     // Route::resource('transaksi', TransaksiController::class);
     // Route::resource('buku', BukuController::class);

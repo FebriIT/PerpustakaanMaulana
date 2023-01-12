@@ -49,6 +49,7 @@
                         <input type="date" name="tgl_pinjam" disabled class="form-control" value="{{ $datenow }}" required>
 
                     </div>
+                    
 
                 </div>
                 <div class="col-6">
@@ -80,6 +81,11 @@
                         <label>Tanggal Kembali</label>
                         <input type="date" name="tgl_kembali" class="form-control" required>
                         <input type="hidden"  name="kategori_id" id="kategori_id" class="form-control" value="">
+                    </div>
+                    <div class="form-group">
+                        <label>Kode Transaksi</label>
+                        <input type="text" name="kode_transaksi"  class="form-control" required>
+
                     </div>
                 </div>
             </div>
