@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2023 at 07:29 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Waktu pembuatan: 12 Jan 2023 pada 10.14
+-- Versi server: 10.4.25-MariaDB
+-- Versi PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `buku`
+-- Struktur dari tabel `buku`
 --
 
 CREATE TABLE `buku` (
@@ -60,16 +60,16 @@ CREATE TABLE `buku` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `buku`
+-- Dumping data untuk tabel `buku`
 --
 
 INSERT INTO `buku` (`id`, `kode_buku`, `judul`, `isbn`, `pengarang`, `penerbit`, `tahun_terbit`, `jumlah_buku`, `deskripsi`, `lokasi`, `cover`, `created_at`, `updated_at`) VALUES
-(36, '99220119229', 'Febri', '2233', 'BUDI', 'DOKNWA', 2022, 21, 'dowadowa', 'Rak 2', 'WhatsApp_Image_2022-12-13_at_17.48.57-removebg-preview.png.1673190808.png', '2023-01-08 08:13:28', '2023-01-08 08:20:50');
+(36, '99220119229', 'Febri', '2233', 'BUDI', 'DOKNWA', 2022, 11, 'dowadowa', 'Rak 2', 'WhatsApp_Image_2022-12-13_at_17.48.57-removebg-preview.png.1673190808.png', '2023-01-08 08:13:28', '2023-01-12 02:08:52');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -85,47 +85,58 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `guru`
+-- Struktur dari tabel `guru`
 --
 
 CREATE TABLE `guru` (
   `id` int(11) NOT NULL,
   `kode_anggota` varchar(50) NOT NULL,
+  `nip` varchar(25) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jk` varchar(50) NOT NULL,
   `nohp` varchar(15) NOT NULL,
+  `umur` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `guru`
+-- Dumping data untuk tabel `guru`
 --
 
-INSERT INTO `guru` (`id`, `kode_anggota`, `nama`, `jk`, `nohp`, `created_at`, `updated_at`) VALUES
-(1, '4', 'guru', 'Laki-Laki', '0558412366311', '2023-01-09 06:12:02', '2023-01-08 23:12:02'),
-(2, '4', 'guruuu', 'Laki-Laki', '085266811422', '2023-01-09 06:13:16', '2023-01-08 23:13:16');
+INSERT INTO `guru` (`id`, `kode_anggota`, `nip`, `nama`, `jk`, `nohp`, `umur`, `created_at`, `updated_at`) VALUES
+(7, '1', '8020170172', 'Budi', 'Laki-Laki', '085266911477', 22, '2023-01-12 08:20:45', '2023-01-12 01:20:45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kepala_perpustakaan`
+-- Struktur dari tabel `kepala_perpustakaan`
 --
 
 CREATE TABLE `kepala_perpustakaan` (
   `id` int(11) NOT NULL,
   `kode_anggota` varchar(50) NOT NULL,
+  `nip` varchar(24) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jk` varchar(50) NOT NULL,
   `nohp` varchar(15) NOT NULL,
+  `umur` int(11) NOT NULL,
+  `tgl_lahir` date NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `kepala_perpustakaan`
+--
+
+INSERT INTO `kepala_perpustakaan` (`id`, `kode_anggota`, `nip`, `nama`, `jk`, `nohp`, `umur`, `tgl_lahir`, `created_at`, `updated_at`) VALUES
+(2, '3', '21211221', 'kaperpus', 'Laki-Laki', '085266911477', 22, '2023-01-12', '2023-01-12 09:07:45', '2023-01-12 02:07:45');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -135,7 +146,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -147,7 +158,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifikasi`
+-- Struktur dari tabel `notifikasi`
 --
 
 CREATE TABLE `notifikasi` (
@@ -162,7 +173,7 @@ CREATE TABLE `notifikasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
--- Dumping data for table `notifikasi`
+-- Dumping data untuk tabel `notifikasi`
 --
 
 INSERT INTO `notifikasi` (`id`, `transaksi_id`, `user_id`, `buku_id`, `sendto`, `status`, `created_at`, `updated_at`) VALUES
@@ -181,12 +192,14 @@ INSERT INTO `notifikasi` (`id`, `transaksi_id`, `user_id`, `buku_id`, `sendto`, 
 (141, 55, 135, 30, 1, 1, '2023-01-05 12:47:45', '2023-01-05 17:30:08'),
 (142, 55, 135, 30, 135, 0, '2023-01-05 12:47:45', '2023-01-05 05:47:45'),
 (143, 56, 135, 36, 1, 0, '2023-01-09 05:48:16', '2023-01-08 22:48:16'),
-(144, 56, 135, 36, 135, 0, '2023-01-09 05:48:16', '2023-01-08 22:48:16');
+(144, 56, 135, 36, 135, 0, '2023-01-09 05:48:16', '2023-01-08 22:48:16'),
+(145, 57, 1, 36, 1, 0, '2023-01-12 08:22:11', '2023-01-12 01:22:11'),
+(146, 57, 1, 36, 1, 0, '2023-01-12 08:22:11', '2023-01-12 01:22:11');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Struktur dari tabel `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -198,7 +211,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Struktur dari tabel `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -216,23 +229,34 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `siswa`
+-- Struktur dari tabel `siswa`
 --
 
 CREATE TABLE `siswa` (
   `id` int(11) NOT NULL,
   `kode_anggota` varchar(50) NOT NULL,
+  `nisn` varchar(25) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jk` varchar(50) NOT NULL,
   `nohp` varchar(15) NOT NULL,
+  `umur` int(11) NOT NULL,
+  `tgl_lahir` date NOT NULL,
+  `alamat` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `siswa`
+--
+
+INSERT INTO `siswa` (`id`, `kode_anggota`, `nisn`, `nama`, `jk`, `nohp`, `umur`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
+(3, '2', '155522', 'sudi', 'Laki-Laki', '21122222112', 22, '2023-01-26', 'dwadwad', '2023-01-12 08:21:55', '2023-01-12 01:21:55');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -248,16 +272,19 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`id`, `user_id`, `buku_id`, `kode_transaksi`, `tgl_pinjam`, `tgl_kembali`, `status`, `created_at`, `updated_at`) VALUES
-(56, 135, 36, '', '2023-01-08', '2023-01-23', 'Dipinjam', '2023-01-08 08:20:50', '2023-01-08 08:20:50');
+(57, 1, 36, 'dwa12', '2023-01-12', '2023-01-15', 'Dipinjam', '2023-01-11 23:37:56', '2023-01-11 23:37:56'),
+(59, 143, 36, '333', '2023-01-12', '2023-02-02', 'Dipinjam', '2023-01-12 02:08:16', '2023-01-12 02:08:16'),
+(60, 146, 36, '22', '2023-01-12', '2023-01-31', 'Dipinjam', '2023-01-12 02:08:31', '2023-01-12 02:08:31'),
+(61, 144, 36, '2e2e', '2023-01-12', '2023-01-09', 'Terlambat', '2023-01-12 02:08:52', '2023-01-12 02:08:52');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -279,71 +306,70 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `akses`, `no_anggota`, `name`, `jk`, `nohp`, `username`, `role`, `email`, `email_verified_at`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, NULL, 0, 'Admins', 'Perempuan', '081366520353', 'admin', 'admin', 'admin@admin.com', NULL, '$2y$10$e.rRYSuR51DjSlO/DuU0Uuq8vJtJY5QdPnGG1vyLVfplbE9styoOe', '0c0139ec3530077a8342a18064de0267.jpg', NULL, '2021-10-16 23:34:06', '2022-02-27 23:14:46'),
-(133, NULL, 1, 'kaperpus', 'Laki-Laki', '085266914777', 'kaperpus', 'kaperpus', 'kaperpus@gmail.com', NULL, '$2y$10$erdRZKRCpSGhPhdTeNG88.qimpVNqe5iEcDS5mmuIjZSeN6qc22lS', NULL, NULL, '2022-12-26 07:40:16', '2022-12-26 07:40:16'),
-(134, NULL, 2, 'guru', 'Laki-Laki', '085266911488', 'guru', 'guru', 'guru@gmail.com', NULL, '$2y$10$XCCpIzWf8lBuQq7KI1x18.xi14zwUv/RIwJ40imyqMUSG6D0tDV/y', NULL, NULL, '2023-01-04 01:51:43', '2023-01-04 01:51:43'),
-(135, NULL, 3, 'siswa', 'Laki-Laki', '085266911499', 'siswa', 'siswa', 'siswa@gmail.com', NULL, '$2y$10$BlA1L0komEI2LLeP/2/Z6.rADdGQ8o4MtQnf/BeyNH5AuSVxhcL3C', NULL, NULL, '2023-01-04 01:52:14', '2023-01-04 01:52:14'),
-(137, NULL, 4, 'guruuu', 'Laki-Laki', '085266811422', 'guru', 'guru', 'guruu@gmail.com', NULL, '$2y$10$tq6mpNPzXWP6783UmPQaU.WWYOspUJxh0G1rPckheDcv5QuJ2lZhW', NULL, NULL, '2023-01-08 23:13:16', '2023-01-08 23:13:16');
+(143, NULL, 1, 'Budi', 'Laki-Laki', '085266911477', 'guru', 'guru', 'Budi@gmail.com', NULL, '$2y$10$jP.Zd..PuwPu5exWPpgyHe4Hf1hOm2UdS3YewNAyScldgLMRa.5rK', NULL, NULL, '2023-01-12 01:20:45', '2023-01-12 01:20:45'),
+(144, NULL, 2, 'sudi', 'Laki-Laki', '21122222112', 'siswa', 'siswa', 'wdwadwa@dwak.com', NULL, '$2y$10$UUmyD6ULgekkz5kuaDC0HuUn.ELY0E7U/UPKL0OMPv8wRto3w6BHa', NULL, NULL, '2023-01-12 01:21:55', '2023-01-12 01:21:55'),
+(146, NULL, 3, 'kaperpus', 'Laki-Laki', '085266911477', 'kaperpus', 'kaperpus', 'kaperpus@gmail.com', NULL, '$2y$10$5CAT5Hg1/bXIDIL7H7Xod.R.LCjlIuMNh/VYy6vq1a9tEZkOMMToy', NULL, NULL, '2023-01-12 02:07:45', '2023-01-12 02:07:45');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `buku`
+-- Indeks untuk tabel `buku`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `guru`
+-- Indeks untuk tabel `guru`
 --
 ALTER TABLE `guru`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kepala_perpustakaan`
+-- Indeks untuk tabel `kepala_perpustakaan`
 --
 ALTER TABLE `kepala_perpustakaan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `notifikasi`
+-- Indeks untuk tabel `notifikasi`
 --
 ALTER TABLE `notifikasi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Indeks untuk tabel `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indexes for table `personal_access_tokens`
+-- Indeks untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -351,93 +377,93 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `siswa`
+-- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `buku`
+-- AUTO_INCREMENT untuk tabel `buku`
 --
 ALTER TABLE `buku`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `guru`
+-- AUTO_INCREMENT untuk tabel `guru`
 --
 ALTER TABLE `guru`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `kepala_perpustakaan`
+--
+ALTER TABLE `kepala_perpustakaan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `kepala_perpustakaan`
---
-ALTER TABLE `kepala_perpustakaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `notifikasi`
+-- AUTO_INCREMENT untuk tabel `notifikasi`
 --
 ALTER TABLE `notifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `siswa`
+-- AUTO_INCREMENT untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `transaksi`
+-- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
