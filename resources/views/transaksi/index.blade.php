@@ -24,7 +24,7 @@
                 <table class="table table-sm" id="transaksisiswa">
                     <thead>
                         <tr>
-                            {{-- <th>ID Transaksi</th> --}}
+                            <th>Kode Peminjaman</th>
                             <th scope="col">Nomor Anggota</th>
                             <th scope="col">Nama Peminjam</th>
                             <th scope="col">Kode Buku</th>
@@ -40,10 +40,10 @@
                         @foreach ($transaksi as $row)
                         
                         <tr>
-                            {{-- <td>{{ $row->id }}</td> --}}
+                            <td>{{ $row->kode_transaksi }}</td>
                             <th scope="row"><a href="/{{ Auth::user()->role }}/anggota/{{ $row->user->no_anggota }}/detail">{{ $row->user->no_anggota }}</a> </th>
                             <td>{{ $row->user->name }}</td>
-                            <td><a href="/{{ Auth::user()->role }}/buku/{{ $row->buku_id }}/detail">{{ $row->buku_id }}</a></td>
+                            <td><a href="/{{ Auth::user()->role }}/buku/{{ $row->buku_id }}/detail">{{ $row->buku->kode_buku }}</a></td>
                             <td>{{ $row->tgl_pinjam }}</td>
                             <td>{{ $row->tgl_kembali }}</td>
                             @if ($row->status=='Dikembalikan')

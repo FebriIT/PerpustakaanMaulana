@@ -8,7 +8,7 @@
             <div class="card-body">
 
                 <div class="section-title">Data Kaperpus <a href="/{{ auth()->user()->role }}/kaperpus/create"
-                        class="btn btn-sm btn-warning float-right">Tambah Data</a></div>
+                        class="btn btn-sm btn-warning">Tambah Data</a></div>
                 <section class="section">
 
                     <div class="table-responsive">

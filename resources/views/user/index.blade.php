@@ -16,24 +16,26 @@
                         <table class="table table-sm" id="datatable">
                             <thead>
                                 <tr>
+                                    <th scope="col">No</th>
                                     <th scope="col">No Anggota</th>
                                     <th scope="col">Username</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Akses</th>
+                                    {{--  <th scope="col">Akses</th>  --}}
 
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $row)
+                                @foreach ($data as $key=>$row)
 
                                 <tr>
+                                    <td>{{ ++$key }}</td>
                                     <td>{{ $row->no_anggota }}</td>
                                     <td>{{ $row->username }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->email }}</td>
-                                    <td>{{ $row->role }}</td>
+                                    {{--  <td>{{ $row->role }}</td>  --}}
 
                                     <td>
                                         <a href="/{{ auth()->user()->role }}/user/{{ $row->id }}/edit"
