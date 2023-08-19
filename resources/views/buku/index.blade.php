@@ -21,6 +21,7 @@
                             <th>Pict</th>
                             <th scope="col">Kode Buku</th>
                             <th scope="col">Judul</th>
+                            <th scope="col">Penerbit</th>
                             <th scope="col">Pengarang</th>
                             <th scope="col">Tahun</th>
                             <th scope="col">Stok</th>
@@ -45,6 +46,7 @@
                             <td>{{ $row->kode_buku }}</td>
                             <td>{{ $row->judul }}</td>
 
+                            <td>{{ $row->penerbit }}</td>
                             <td>{{ $row->pengarang }}</td>
                             <td>{{ $row->tahun_terbit }}</td>
                             <td>{{ $row->jumlah_buku }}</td>
@@ -54,7 +56,7 @@
                                 {{-- <a href="/admin/buku/{{ $row->id }}/pinjam" class="btn btn-icon btn-sm btn-primary" title="Pinjam Buku"><i class="fas fa-book"></i></a> --}}
                                     <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/edit" class="btn btn-icon btn-sm btn-warning" title="Edit Buku"><i class="far fa-edit"></i></a>
                                     <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/delete" class="btn btn-icon btn-sm btn-danger" onclick="return(confirm('Apakah anda yakin inggin menghapus data ini?'))" title="Edit Buku"><i class="fas fa-trash"></i></a>
-                                    <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/detail" class="btn btn-icon btn-sm btn-primary" title="Edit Buku"><i class="far fa-open"></i></a>
+                                    <a href="/{{ auth()->user()->role }}/buku/{{ $row->id }}/detail" class="btn btn-icon btn-sm btn-primary" title="Detail Buku"><i class="far fa-folder-open"></i></a>
                                     
                                
                                     @else

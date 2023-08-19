@@ -21,7 +21,9 @@ class DashboardController extends Controller
 
         }
         $user=User::all()->count();
-        $anggota=User::where('role','user')->count();
+        $guru=User::where('role','guru')->count();
+        $siswa=User::where('role','siswa')->count();
+        $anggota=$guru+$siswa;
         // dd($anggota);
         return view('dashboard',compact('buku','transaksi','user','anggota'));
     }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="section-title">Transaksi
+        <div class="section-title">Data Peminjaman
             @if (Auth::user()->role=='admin'||auth()->user()->role=='kaperpus')
 
             <a href="/{{ auth()->user()->role }}/transaksi/create" class="btn btn-sm btn-warning float-right">Transaksi Baru</a>
@@ -14,7 +14,7 @@
 <div class="card">
     <div class="card-body">
 
-        <div class="section-title">Transaksi
+        <div class="section-title">
 
         </div>
         <section class="section">
@@ -41,8 +41,19 @@
                         
                         <tr>
                             <td>{{ $row->kode_transaksi }}</td>
-                            <th scope="row"><a href="/{{ Auth::user()->role }}/anggota/{{ $row->user->no_anggota }}/detail">{{ $row->user->no_anggota }}</a> </th>
+                            @if($row->user->role=='siswa')
+                            <td>SW{{ $row->user->id }}</td>
+                            @elseif($row->user->role=='guru')
+                            <td>GR{{ $row->user->id }}</td>
+                            @elseif($row->user->role=='admin')
+                            <td>AD{{ $row->user->id }}</td>
+                            @elseif($row->user->role=='kaperpus')
+                            <td>KP{{ $row->user->id }}</td>
+
+                            @endif
+                            {{-- <th scope="row"><a href="/{{ Auth::user()->role }}/anggota/{{ $row->user->no_anggota }}/detail">{{ $row->user->no_anggota }}</a> </th> --}}
                             <td>{{ $row->user->name }}</td>
+
                             <td><a href="/{{ Auth::user()->role }}/buku/{{ $row->buku_id }}/detail">{{ $row->buku->kode_buku }}</a></td>
                             <td>{{ $row->tgl_pinjam }}</td>
                             <td>{{ $row->tgl_kembali }}</td>

@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>Tambah User</h4>
+        <h4>Tambah Anggota</h4>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,59 +16,78 @@
         </div>
     @endif
     <div class="card-body">
-        <form action="{{ route('guru.store') }}" method="POST">
+        <form action="{{ route('anggota.store') }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-6">
                     
                     <div class="form-group">
-                        <label>NIP</label>
-                        <input type="number" name="nip" class="form-control" required>
+                        <label>NIP/NISN <span style="color:red;">*</span></label>
+
+                        <input type="number" name="nipnisn" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Nama</label>
+                        <label>Nama <span style="color:red;">*</span></label>
+
                         <input type="text" name="name" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Jenis Kelamin</label>
+                        <label>Jenis Kelamin <span style="color:red;">*</span></label>
+
                         <select class="form-control" name="jk" required>
                             <option value="">-Pilih-</option>
                             <option value="Laki-Laki">Laki-Laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Nomor HP</label>
-                        <input type="number" name="nohp" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Umur</label>
-                        <input type="number" name="umur" class="form-control" required>
-                    </div>
+                    
+                    
+                   
+                     <div class="form-group">
+                         <label>Tanggal Lahir <span style="color:red;">*</span></label>
+
+                         <input type="date" name="tgl_lahir" class="form-control" required>
+                     </div>
+                     <div class="form-group">
+                         <label>Alamat <span style="color:red;">*</span></label>
+
+                         <textarea name="alamat" class="form-control" id="" cols="10" rows="20"></textarea>
+                     </div>
+
                 </div>
                 <div class="col-6">
+                
                     <div class="form-group">
-                        <label>Nomor Anggota</label>
-                        <input type="number" name="no_anggota" class="form-control" value="{{ $data }}" required>
+                        <label>Nomor HP</label>
+                        <input type="number" name="nohp" class="form-control" >
                     </div>
+
+                   
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label>Hak Akses <span style="color:red;">*</span></label>
+
+                        <select class="form-control" name="role" required>
+                            <option value="">-Pilih-</option>
+                            <option value="guru">Guru</option>
+                            <option value="siswa">Siswa</option>
+                        </select>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Username</label>
+                        <label>Username <span style="color:red;">*</span></label>
+
                         <input type="text" name="username" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
+                        <label>Password <span style="color:red;">*</span></label>
+
                         <input type="password" name="password" class="form-control" required>
                     </div>
                 </div>
             </div>
 
-            <a href="/{{ auth()->user()->role }}/user" class="btn btn-warning ">Kembali</a>
+            <a href="/{{ auth()->user()->role }}/anggota" class="btn btn-warning ">Kembali</a>
             <button type="reset" class="btn btn-danger">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Simpan</button>
         </form>

@@ -43,16 +43,7 @@ class KaperpusController extends Controller
         $data->email=$request->email;
         $data->password=bcrypt($request->password);
         
-        $guru=new Kaperpus();
         
-        $guru->nip=$request->nip;
-        $guru->umur=$request->umur;
-        $guru->kode_anggota=$request->no_anggota;
-        $guru->nama=$request->name;
-        $guru->nohp=$request->nohp;
-        $guru->tgl_lahir=$request->tgl_lahir;
-        $guru->jk=$request->jk;
-        $guru->save();
         $data->save();
         return redirect('/admin/user')->with('sukses','Data Berhasil Disimpan');
     }

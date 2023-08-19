@@ -15,7 +15,7 @@
 
     <div class="container">
         <div>
-            <h3><center>Laporan Transaksi Dari Tanggal {{ $mulai }} sampai {{ $akhir }}</center></h3>
+            <h3><center>Laporan Peminjaman Dari Tanggal {{ $mulai }} sampai {{ $akhir }}</center></h3>
             <table style="width: 100%;text-align: center;" border="1">
                 <thead>
                     <tr>

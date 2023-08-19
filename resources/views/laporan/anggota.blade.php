@@ -3,10 +3,13 @@
 @section('content')
 <div class="card">
      <div class="card-header">
-        <h4>Laporan Anggota</h4>
+        <h4>Laporan Anggota </h4>
+
+        <a href="/{{ auth()->user()->role }}/laporansemuaanggota/download" target="_blank" class="btn btn-primary float-right">Laporan Semua Anggota</a>
+
     </div>
     <div class="card-body">
-        <form action="/admin/laporananggota/download" enctype="multipart/form-data" method="POST">
+        <form action="/admin/laporananggota/download" enctype="multipart/form-data" method="POST" target="_blank">
             @csrf
             <div class="row">
                 <div class="col-6">

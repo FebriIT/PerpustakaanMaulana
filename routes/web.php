@@ -51,12 +51,13 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::get('user/{id}/edit', [UserController::class,'edit']);
     Route::post('user/{id}/update', [UserController::class,'update'])->name('user.update');
 
-    Route::get('/guru',[GuruController::class,'index']);
-    Route::get('/guru/create',[GuruController::class,'create']);
-    Route::post('guru/store', [GuruController::class,'store'])->name('guru.store');
-    Route::get('guru/{id}/edit', [GuruController::class,'edit']);
-    Route::post('guru/{id}/update', [GuruController::class,'update'])->name('guru.update');
-    Route::get('guru/{id}/destroy', [GuruController::class,'destroy']);
+    Route::get('/anggota',[GuruController::class,'index'])->name('anggota.index');
+    Route::get('/anggota/create',[GuruController::class,'create']);
+    Route::post('anggota/store', [GuruController::class,'store'])->name('anggota.store');
+    Route::get('anggota/{id}/edit', [GuruController::class,'edit']);
+    Route::post('anggota/{id}/update', [GuruController::class,'update'])->name('anggota.update');
+    Route::get('anggota/{id}/destroy', [GuruController::class,'destroy']);
+    Route::get('anggota/{id}/cetak', [GuruController::class,'cetak']);
 
 
     Route::get('/siswa',[SiswaController::class,'index']);
@@ -97,11 +98,16 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::post('/profile/update',[ProfileController::class,'update']);
 
     Route::get('/laporananggota', [LaporanController::class,'laporananggota']);
+    Route::get('/laporanpendaftaran', [LaporanController::class,'laporanpendaftaran']);
+    Route::get('/laporandenda', [LaporanController::class,'laporandenda']);
     Route::get('/laporanbuku', [LaporanController::class,'laporanbuku']);
     Route::get('/laporantransaksi', [LaporanController::class,'laporantransaksi']);
     Route::post('/laporananggota/download',[LaporanController::class,'dwanggota'] );
+    Route::get('/laporansemuaanggota/download',[LaporanController::class,'dwsemuaanggota'] );
     Route::post('/laporanbuku/download',[LaporanController::class,'dwbuku'] );
     Route::post('/laporantransaksi/download',[LaporanController::class,'dwtransaksi'] );
+    Route::post('/laporandenda/download',[LaporanController::class,'dwdenda'] );
+    Route::post('/laporanpendaftaran/download',[LaporanController::class,'dwpendaftaran'] );
 
 
     Route::get('/notifikasi/viewall',[NotifikasiController::class,'viewall']);

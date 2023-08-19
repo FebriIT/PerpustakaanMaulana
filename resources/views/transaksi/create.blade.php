@@ -38,12 +38,9 @@
                     </div>
                     <div class="form-group">
                         <label>Nomor Anggota</label>
-                        <input type="number" id="no_anggota" class="form-control" required disabled>
+                        <input type="text" id="no_anggota" class="form-control" required disabled>
                     </div>
-                    <div class="form-group">
-                        <label>No HP</label>
-                        <input type="number" name="nohp" id="nohp" class="form-control" required disabled>
-                    </div>
+                   
                     <div class="form-group">
                         <label>Tanggal Pinjam</label>
                         <input type="date" name="tgl_pinjam" disabled class="form-control" value="{{ $datenow }}" required>
@@ -82,11 +79,7 @@
                         <input type="date" name="tgl_kembali" class="form-control" required>
                         <input type="hidden"  name="kategori_id" id="kategori_id" class="form-control" value="">
                     </div>
-                    <div class="form-group">
-                        <label>Kode Transaksi</label>
-                        <input type="text" name="kode_transaksi"  class="form-control" required>
-
-                    </div>
+                    
                 </div>
             </div>
 
@@ -113,21 +106,48 @@
                     <table class="table table-sm table-hover" id="carianggota">
                         <thead>
                             <tr>
-                                <th scope="col">No Anggota</th>
-                                <th>Status</th>
+                                <th scope="col">Kode Anggota</th>
+                                <th>Hak Akses</th>
                                 <th scope="col">Nama</th>
 
-                                <th scope="col">Email</th>
+                                <th scope="col">Jenis Kelamin</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($anggota as $row)
-                            <tr class="pilihanggota" idanggota="{{ $row->id }}" namaanggota="{{ $row->name }}" noanggota="{{ $row->no_anggota }}" nohp="{{ $row->nohp }}">
-                                <th scope="row">{{ $row->no_anggota }}</th>
+                            @php
+                                
+                            if($row->role=='admin'){
+                                $dnoangota='AD'.$row->no_anggota;
+
+                            }elseif($row->role=='kaperpus'){
+                                $dnoangota='KP'.$row->no_anggota;
+
+
+                            }elseif($row->role=='guru'){
+                                $dnoangota='GR'.$row->no_anggota;
+
+
+                            }elseif($row->role=='siswa'){
+                                $dnoangota='SW'.$row->no_anggota;
+
+                            }
+
+
+                            @endphp
+
+                            <tr class="pilihanggota" idanggota="{{ $row->id }}" namaanggota="{{ $row->name }}" noanggota="{{ $dnoangota }}" role="{{ $row->role }}">
+
+                                <th scope="row">
+                                
+                                    {{ $dnoangota }}
+
+                                
+                                </th>
                                 <th>{{ $row->role }}</th>
                                 <td><a href="#"> {{ $row->name }}</a></td>
-                                <td>{{ $row->email }}</td>
+                                <td>{{ $row->jk }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -207,16 +227,18 @@
         $('#btnmodalanggota').click(function(){
             $('#modalAnggota').modal('show');
             $('#carianggota').on("click",".pilihanggota",function(e){
+          
                 var idanggota=$(this).attr('idanggota');
                 var nmanggota=$(this).attr('namaanggota');
+                var role=$(this).attr('role');
                 var noanggota=$(this).attr('noanggota');
-                var nohp=$(this).attr('nohp');
+                
                 $('#modalAnggota').modal('hide');
                 $('#user_id').val(idanggota);
                 $('#name').val(noanggota+' - '+nmanggota);
                 $('#name1').val(nmanggota);
                 $('#no_anggota').val(noanggota);
-                $('#nohp').val(nohp);
+                
             });
 
         });

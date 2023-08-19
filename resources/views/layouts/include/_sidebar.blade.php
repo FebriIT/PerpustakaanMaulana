@@ -14,6 +14,7 @@
                     <li class="{{ (request()->is('admin/guru')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/guru">Data Guru</a></li>
                     <li class="{{ (request()->is('admin/siswa')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/siswa">Data Siswa</a></li>  --}}
                     <li class="{{ (request()->is('admin/user')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/user">Data User</a></li>
+                    <li class="{{ (request()->is('admin/anggota')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/anggota">Data Anggota</a></li>
                     <li class="{{ (request()->is('admin/buku')) ? 'active' : '' }}"><a class="nav-link" href="/admin/buku">Data Buku</a></li>
                 </ul>
             </li>
@@ -24,8 +25,10 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Laporan</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ (request()->is('admin/laporananggota')) ? 'active' : '' }}" ><a class="nav-link" href="/admin/laporananggota">Laporan Anggota</a></li>
+                    <li class="{{ (request()->is('admin/laporanpendaftaran')) ? 'active' : '' }}"><a class="nav-link" href="/admin/laporanpendaftaran">Laporan Pendaftaran</a></li>
+                    <li class="{{ (request()->is('admin/laporantransaksi')) ? 'active' : '' }}"><a class="nav-link" href="/admin/laporantransaksi">Laporan Peminjaman</a></li>
+                    <li class="{{ (request()->is('admin/laporandenda')) ? 'active' : '' }}"><a class="nav-link" href="/admin/laporandenda">Laporan Denda</a></li>
                     <li class="{{ (request()->is('admin/laporanbuku')) ? 'active' : '' }}"><a class="nav-link" href="/admin/laporanbuku">Laporan Buku</a></li>
-                    <li class="{{ (request()->is('admin/laporantransaksi')) ? 'active' : '' }}"><a class="nav-link" href="/admin/laporantransaksi">Laporan Kelola Peminjaman</a></li>
                 </ul>
             </li>
             @elseif (auth()->user()->role=='kaperpus')
@@ -40,7 +43,7 @@
                 <ul class="dropdown-menu">
                     {{--  <li class="{{ (request()->is('kaperpus/laporananggota')) ? 'active' : '' }}" ><a class="nav-link" href="/kaperpus/laporananggota">Laporan Anggota</a></li>  --}}
                     <li class="{{ (request()->is('kaperpus/laporanbuku')) ? 'active' : '' }}"><a class="nav-link" href="/kaperpus/laporanbuku">Laporan Buku</a></li>
-                    <li class="{{ (request()->is('kaperpus/laporantransaksi')) ? 'active' : '' }}"><a class="nav-link" href="/kaperpus/laporantransaksi">Laporan Kelola Peminjaman</a></li>
+                    <li class="{{ (request()->is('kaperpus/laporantransaksi')) ? 'active' : '' }}"><a class="nav-link" href="/kaperpus/laporantransaksi">Laporan Peminjaman</a></li>
                 </ul>
             </li>
 

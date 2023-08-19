@@ -50,10 +50,7 @@
                                         <input type="number" name="nohp" class="form-control" required value="{{ $data->nohp }}">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Avatar</label>
-                                        <input type="file" name="avatar" class="form-control">
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">

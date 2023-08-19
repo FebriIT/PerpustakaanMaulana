@@ -24,10 +24,10 @@
                         <th>Nomor Anggota</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
-                        <th>No HP</th>
+                        {{-- <th>No HP</th> --}}
                         <th>Username</th>
                         <th>Email</th>
-                        <th>Role</th>
+                        <th>Hak Akses</th>
                         <th>Dibuat</th>
                     </tr>
                 </thead>
@@ -36,10 +36,19 @@
                         <tr>
 
                             <td>{{ ++$key }}</td>
-                            <td>{{ $row->no_anggota }}</td>
+                             @if($row->role=='siswa')
+                             <td>SW{{ $row->id }}</td>
+                             @elseif($row->role=='guru')
+                             <td>GR{{ $row->id }}</td>
+                             @elseif($row->role=='admin')
+                             <td>AD{{ $row->id }}</td>
+                             @elseif($row->role=='kaperpus')
+                             <td>KP{{ $row->id }}</td>
+
+                             @endif
                             <td>{{ $row->name }}</td>
                             <td>{{ $row->jk }}</td>
-                            <td>{{ $row->nohp }}</td>
+                            {{-- <td>{{ $row->nohp }}</td> --}}
                             <td>{{ $row->username }}</td>
                             <td>{{ $row->email }}</td>
                             <td>{{ $row->role }}</td>

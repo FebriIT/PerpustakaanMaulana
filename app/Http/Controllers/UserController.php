@@ -20,11 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data=User::where('role','admin')->get();
+        $data=User::where('role','admin')->orwhere('role','kaperpus')->get();
         $siswa=Siswa::all();
-        $guru=Guru::all();
+        $anggota=user::where('role','guru')->orwhere('role','siswa')->get();
         $kaperpus=Kaperpus::all();
-        return view('user.index',compact('data','siswa','guru','kaperpus'));
+        return view('user.index',compact('data','siswa','anggota','kaperpus'));
     }
 
     /**
@@ -47,30 +47,51 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request, [
             'name' => 'required|max:50',
             'no_anggota'=>'unique:users,no_anggota|max:50',
             'username'=>'required|unique:users|max:50',
-            'email' => 'required|email|unique:users|max:20',
             'nohp' => 'required|max:13',
-            'username'=>'required|max:15'
+            'role' => 'required',
 
         ]);
         // dd($request->all());
         $data=new User;
-        $data->no_anggota=$request->no_anggota;
+        
         $data->jk=$request->jk;
-        $data->nohp=$request->nohp;
         $data->name=$request->name;
         $data->username=$request->username;
-        $data->role='admin';
-        $data->email=$request->email;
+        $data->role=$request->role;
         $data->password=bcrypt($request->password);
+        
+        if($request->role=='admin'){
+            $guru=new Admin();
+        
+            $guru->nip=$request->nip;
+            $guru->nama=$request->name;
+            $guru->jk=$request->jk;
+            $guru->alamat=$request->alamat;
+            $guru->tgl_lahir=$request->tgl_lahir;
+            $guru->nohp=$request->nohp;
+            $guru->save();
+            $data->no_anggota=$guru->id;
+        }elseif($request->role=='kaperpus'){
+             $siswa=new Kaperpus();
+            
+            $siswa->nip=$request->nip;
+            $siswa->nama=$request->name;
+            $siswa->jk=$request->jk;
+            $siswa->alamat=$request->alamat;
+            $siswa->tgl_lahir=$request->tgl_lahir;
+            $siswa->nohp=$request->nohp;
+            $siswa->save();
+            $data->no_anggota=$siswa->id;
 
+        }
         
         $data->save();
-        return redirect()->route('user.index')->with('sukses','Data Berhasil Disimpan');
+
+        return redirect('/admin/user')->with('sukses','Data Berhasil Disimpan');
     }
 
     /**
@@ -93,7 +114,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $data=User::find($id);
-        return view('user.edit',compact('data'));
+        $admin=Admin::find($data->no_anggota);
+        $kaperpus=Kaperpus::find($data->no_anggota);
+        return view('user.edit',compact('data','admin','kaperpus'));
     }
 
     /**
@@ -105,20 +128,35 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'name' => 'required|max:50',
-            'nohp' => 'required|max:13',
-
-        ]);
         $data=User::find($id);
-
-        if($request->password!=null){
-            $data->update(['jk'=>$request->jk,'nohp'=>$request->nohp,'name'=>$request->name,'password'=>bcrypt($request->password)]);
-        }else{
-            $data->update(['jk'=>$request->jk,'nohp'=>$request->nohp,'name'=>$request->name]);
+        
+        
+        if($data->role=='Admin'){
+            Admin::find($data->no_anggota)->update([
+                'nip'=>$request->nip,
+                'nama'=>$request->name,
+                'jk'=>$request->jk,
+                'nohp'=>$request->nohp,
+                'tgl_lahir'=>$request->tgl_lahir,
+                'alamat'=>$request->alamat
+            ]);
+        }elseif($data->role=='kaperpus'){
+            Kaperpus::find($data->no_anggota)->update([
+                'nip'=>$request->nip,
+                'nama'=>$request->name,
+                'jk'=>$request->jk,
+                'nohp'=>$request->nohp,
+                'tgl_lahir'=>$request->tgl_lahir,
+                'alamat'=>$request->alamat
+            ]);
         }
-        return redirect()->route('user.index')->with('sukses','Data Berhasil Diperbarui');
+        $data->update([
+            'nama'=>$request->name,
+            'jk'=>$request->jk,
+        ]);
+
+        return redirect('/admin/user')->with('sukses','Data Berhasil Diperbarui');
+
     }
 
     /**
@@ -129,16 +167,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $data=User::find($id);
-        $image = 'public/avatar/' . $data->name . '/'.$data->avatar ;
-            // dd(Storage::exists($image));
-            if (Storage::exists($image)) {
-
-                Storage::delete($image);
-            }
-        $transaksi=Transaksi::where('user_id',$id)->delete();
+        $user=User::find($id);
+        if($user->role=='guru'){
+            $guru=Admin::find($user->no_anggota);
+            $guru->delete();
+        }elseif($user->role=='siswa'){
+            $siswa=Kaperpus::find($user->no_anggota);
+            $siswa->delete();
+        }
         
-        $data->delete();
+        // $transaksi=Transaksi::where('user_id',$id)->delete();
+        
+        $user->delete();
         return redirect()->route('user.index')->with('sukses','Data Berhasil Dihapus');
+        $data=User::find($id);
+        
     }
 }

@@ -27,22 +27,22 @@ class ProfileController extends Controller
         if($request->password!=null){
             $data->update(['password'=>bcrypt($request->password)]);
         }
-        if ($data->avatar == null) {
-            if ($request->has('avatar')) {
-                $request->file('avatar')->move(public_path() . '/storage/avatar/'.$data->name, $request->file('avatar')->getClientOriginalName());
-                $data->avatar = $request->file('avatar')->getClientOriginalName();
-                $data->save();
-            }
-        } else {
-            if ($request->has('avatar')) {
-                //   ini untuk update profile
-                unlink(public_path() . '/storage/avatar/' . $data->name . '/' . $data->avatar);
+        // if ($data->avatar == null) {
+        //     if ($request->has('avatar')) {
+        //         $request->file('avatar')->move(public_path() . '/storage/avatar/'.$data->name, $request->file('avatar')->getClientOriginalName());
+        //         $data->avatar = $request->file('avatar')->getClientOriginalName();
+        //         $data->save();
+        //     }
+        // } else {
+        //     if ($request->has('avatar')) {
+        //         //   ini untuk update profile
+        //         unlink(public_path() . '/storage/avatar/' . $data->name . '/' . $data->avatar);
 
-                $request->file('avatar')->move(public_path() . '/storage/avatar/' . $data->name, $request->file('avatar')->getClientOriginalName());
-                $data->avatar = $request->file('avatar')->getClientOriginalName();
-                $data->save();
-            }
-        }
+        //         $request->file('avatar')->move(public_path() . '/storage/avatar/' . $data->name, $request->file('avatar')->getClientOriginalName());
+        //         $data->avatar = $request->file('avatar')->getClientOriginalName();
+        //         $data->save();
+        //     }
+        // }
         return redirect()->back()->with('sukses','Data berhasil di ubah');
     }
 }

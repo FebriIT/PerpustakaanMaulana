@@ -187,7 +187,7 @@ class BukuController extends Controller
     {
 
 
-        // dd($req->all());
+        // dd(Transaksi::all()->last()->id);
         $transaksi=new Transaksi;
         $transaksi->user_id=$req->user_id;
         $transaksi->buku_id=$req->buku_id;
@@ -195,7 +195,9 @@ class BukuController extends Controller
         $transaksi->tgl_pinjam=$datenow;
         $transaksi->tgl_kembali=$req->tgl_kembali;
         $transaksi->status='Dipinjam';
-        $transaksi->kode_transaksi=$req->kode_transaksi;
+        
+        $kodebaran=Transaksi::all()->count();
+        $transaksi->kode_transaksi='TRS'.$kodebaran.$req->buku_id.$req->user_id.Transaksi::all()->last()->id;
         //kondisi stok buku berkurang
         $buku=Buku::find($req->buku_id);
 

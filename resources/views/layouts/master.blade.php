@@ -35,7 +35,7 @@
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2021 <div class="bullet"></div> Design By <a href="#">IT SMA Negeri 8 Merangin</a>
+                    Copyright &copy; 2023 <div class="bullet"></div> Design By <a href="#">IT SMA Negeri 8 Merangin</a>
                 </div>
                 {{-- <div class="footer-right">
                     2.3.0
@@ -73,6 +73,7 @@
     <script>
         $(document).ready(function () {
             $('#datatable').DataTable();
+            $('#datatable1').DataTable();
             $('#transaksisiswa').DataTable();
             $('#transaksiguru').DataTable();
             $('#datatable1').DataTable();
