@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Transaksi;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Charts\MonthlyPendaftaranChart;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use PDF;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class LaporanController extends Controller
 {
@@ -29,7 +33,19 @@ class LaporanController extends Controller
         return view('laporan.laporandenda');
     }
     public function laporanpendaftaran(){
-        return view('laporan.laporanpendaftaran');
+        $bulan=Guru::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        ->GroupBy(DB::raw("MONTHNAME(created_at)"))
+        ->pluck('bulan');
+
+        // $d=DB::count();
+        // $total_guru=Guru::select()
+        // dd($bulan);
+        $total_guru=Guru::select(DB::raw("CAST(COUNT(id) as int) as total"))
+        ->GroupBy(DB::raw("Month(created_at)"))
+        ->pluck('total');
+        dd($total_guru);
+
+        return view('laporan.laporanpendaftaran',compact('bulan'));
     }
 
     public function dwanggota (Request $req)
@@ -53,7 +69,7 @@ class LaporanController extends Controller
     public function dwsemuaanggota ()
     {
         $tglskrng=date('d F Y', strtotime(now()));
-       
+
         // $p=DB::select('SELECT anggota .*,users.name,users.jk,users.no_anggota,users.nohp FROM transaksi JOIN users ON transaksi.user_id=users.id  WHERE transaksi.status="Pinjam" AND transaksi.created_at BETWEEN ? AND ?',[$req->mulai,$req->akhir]);
         $p=User::where('role','siswa')->Orwhere('role','guru')->get();
         // $p=DB::select('SELECT transaksi.*,users.name,users.jk,users.no_anggota,users.nohp,transaksi.created_at FROM transaksi JOIN users on
@@ -82,7 +98,7 @@ class LaporanController extends Controller
         $pdf_doc = PDF::loadView('laporan.lapbuku', compact('p','mulai','akhir','tglskrng'))->setPaper('a4', 'landscape');
 
         return $pdf_doc->stream('laporan-buku.pdf');
-    }   
+    }
     public function dwtransaksi(Request $req)
     {
         // dd($req->all());
@@ -93,12 +109,12 @@ class LaporanController extends Controller
             // dd($req->all());
             $status=$req->status;
             $p=DB::select('SELECT transaksi.*,users.name,buku.isbn,tgl_pinjam,tgl_kembali,transaksi.status,buku.judul FROM `transaksi` JOIN users ON users.id=transaksi.user_id JOIN buku ON buku.id=transaksi.buku_id  WHERE transaksi.status=? AND transaksi.created_at BETWEEN ? AND ?',[$status,$mulai,$akhir]);
-            
+
         }else{
             $p=DB::select('SELECT transaksi.*,users.name,buku.isbn,tgl_pinjam,tgl_kembali,transaksi.status,buku.judul FROM `transaksi` JOIN users ON users.id=transaksi.user_id JOIN buku ON buku.id=transaksi.buku_id WHERE transaksi.created_at BETWEEN ? AND ?',[$mulai,$akhir]);
 
         }
-        
+
         // $p=DB::select('SELECT transaksi.*,users.name,users.jk,users.no_anggota,users.nohp FROM transaksi JOIN users ON transaksi.user_id=users.id  WHERE transaksi.status="Kembali" AND transaksi.created_at BETWEEN ? AND ?',[$mulai,$akhir]);
         // dd($ps);
         view()->share('p', $p);
@@ -118,7 +134,7 @@ class LaporanController extends Controller
         ->where('status','Terlambat')
         ->whereBetween('created_at',[$mulai,$akhir])
         ->count();
-        
+
         view()->share('p', $p);
 
         $pdf_doc = PDF::loadView('laporan.lapdenda', compact('p','mulai','akhir','tglskrng','dcount'))->setPaper('a4', 'landscape');
@@ -128,12 +144,12 @@ class LaporanController extends Controller
 
     public function dwpendaftaran(Request $req)
     {
-       
+        // dd($req->all());
         $tglskrng=date('d F Y', strtotime(now()));
         $mulai=$req->mulai;
         $akhir=$req->akhir;
         $p=DB::select('SELECT users.* FROM `users`  WHERE users.created_at BETWEEN ? AND ?',[$mulai,$akhir]);
-       
+
         view()->share('p', $p);
 
         $pdf_doc = PDF::loadView('laporan.lappendaftaran', compact('p','mulai','akhir','tglskrng',
@@ -142,5 +158,5 @@ class LaporanController extends Controller
         return $pdf_doc->stream('laporan-denda.pdf');
     }
 
-   
+
 }

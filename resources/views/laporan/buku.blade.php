@@ -6,7 +6,7 @@
         <h4>Laporan Buku</h4>
     </div>
     <div class="card-body">
-        <form action="/{{ auth()->user()->role }}/laporanbuku/download" enctype="multipart/form-data" method="POST">
+        <form action="/{{ auth()->user()->role }}/laporanbuku/download" enctype="multipart/form-data" method="POST" target="_blank">
             @csrf
             <div class="row">
                 <div class="col-6">

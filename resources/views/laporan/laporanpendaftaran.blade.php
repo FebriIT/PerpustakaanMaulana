@@ -1,36 +1,94 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="card">
     <div class="card-header">
         <h4>Laporan Pendaftaran</h4>
     </div>
     <div class="card-body">
-        <form action="/{{ auth()->user()->role }}/laporanpendaftaran/download" enctype="multipart/form-data" method="POST">
-            @csrf
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Tanggal Mulai</label>
-                        <input type="date" name="mulai" class="form-control" required>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Tanggal Akhir</label>
-                        <input type="date" name="akhir" class="form-control" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <div class="row">
+            <div class="col-12">
+                <canvas id="myChart"></canvas>
             </div>
-
-
-        </form>
-
-        {{-- <a href="/peminjaman/harian" class="btn btn-primary">Harian</a>
-        <a href="/peminjaman/bulanan" class="btn btn-primary">Bulanan</a>
-        <a href="/peminjaman/tahunan" class="btn btn-primary">Tahunan</a> --}}
+            <div class="col-12">
+                <div id="grafik"></div>
+            </div>
+        </div>
     </div>
 </div>
+
 @endsection
+
+@section('js')
+<script src="{{ asset('template/assets/modules/chart.min.js') }}"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+    // alert('ok');
+    var bulan=<?php echo "$bulan"?>;
+    // alert(bulan);
+    Highcharts.chart('grafik', {
+
+        title: {
+            text: 'U.S Solar Employment Growth',
+            align: 'left'
+        },
+
+        subtitle: {
+            text: 'By Job Category. Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
+            align: 'left'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Employees'
+            }
+        },
+
+        xAxis: {
+            categories:bulan
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                allowPointSelect:true
+            }
+        },
+
+        series: [ {
+            name: 'Guru',
+            data: [5,6]
+        }, {
+            name: 'Siswa',
+            data: [2, 3]
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+
+</script>
+
+
+@endsection
+
 

@@ -62,11 +62,12 @@
     <script src="{{ asset('template/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('template/assets/js/custom.js') }}"></script>
 
-
+    <script src="{{asset('template/assets/modules/chart.min.js')}}"></script>
 
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
-
+    
+    <script src="{{asset('template/assets/js/page/modules-chartjs.js')}}"></script>
 
 
     @yield('js')
