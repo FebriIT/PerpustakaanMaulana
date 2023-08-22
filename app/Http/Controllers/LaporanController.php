@@ -43,9 +43,12 @@ class LaporanController extends Controller
         $total_guru=Guru::select(DB::raw("CAST(COUNT(id) as int) as total"))
         ->GroupBy(DB::raw("Month(created_at)"))
         ->pluck('total');
-        dd($total_guru);
-
-        return view('laporan.laporanpendaftaran',compact('bulan'));
+        $total_siswa=Siswa::select(DB::raw("CAST(COUNT(id) as int) as total"))
+        ->GroupBy(DB::raw("Month(created_at)"))
+        ->pluck('total');
+        // dd($total_guru);
+        
+        return view('laporan.laporanpendaftaran',compact('bulan','total_guru','total_siswa'));
     }
 
     public function dwanggota (Request $req)

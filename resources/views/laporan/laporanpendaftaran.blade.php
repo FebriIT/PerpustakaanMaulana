@@ -3,14 +3,14 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
+    {{-- <div class="card-header">
         <h4>Laporan Pendaftaran</h4>
-    </div>
+    </div> --}}
     <div class="card-body">
         <div class="row">
-            <div class="col-12">
+            {{-- <div class="col-12">
                 <canvas id="myChart"></canvas>
-            </div>
+            </div> --}}
             <div class="col-12">
                 <div id="grafik"></div>
             </div>
@@ -22,26 +22,27 @@
 
 @section('js')
 <script src="{{ asset('template/assets/modules/chart.min.js') }}"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="{{ asset('js/highcharts.js') }}"></script>
 <script>
     // alert('ok');
     var bulan=<?php echo "$bulan"?>;
+    var total_guru=<?php echo "$total_guru"?>;
+    var total_siswa=<?php echo "$total_siswa"?>;
+
+
     // alert(bulan);
     Highcharts.chart('grafik', {
 
         title: {
-            text: 'U.S Solar Employment Growth',
+            text: 'Laporan Pendaftaran',
             align: 'left'
         },
 
-        subtitle: {
-            text: 'By Job Category. Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
-            align: 'left'
-        },
+        
 
         yAxis: {
             title: {
-                text: 'Number of Employees'
+                text: 'Jumlah Pendaftar'
             }
         },
 
@@ -63,10 +64,11 @@
 
         series: [ {
             name: 'Guru',
-            data: [5,6]
+            data: total_guru
+
         }, {
             name: 'Siswa',
-            data: [2, 3]
+            data: total_siswa
         }],
 
         responsive: {

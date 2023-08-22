@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2023 at 05:28 AM
+-- Generation Time: Aug 22, 2023 at 03:32 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -126,7 +126,8 @@ CREATE TABLE `guru` (
 
 INSERT INTO `guru` (`id`, `nip`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
 (21, '150502211', 'Muhammad Budiman', 'Laki-Laki', NULL, '2001-01-08', 'Dusun Kali Aro RT 03', '2023-07-26 13:33:26', '2023-07-26 06:33:26'),
-(22, '343435345', 'Hj. Ade Erma Suryani, S.Pd', 'Perempuan', '2112', '2003-06-25', 'gghgfvdfvfdvv', '2023-07-26 13:44:04', '2023-07-26 07:25:17');
+(22, '343435345', 'Hj. Ade Erma Suryani, S.Pd', 'Perempuan', '2112', '2003-06-25', 'gghgfvdfvfdvv', '2023-08-23 13:44:04', '2023-07-26 07:25:17'),
+(25, '2211221', 'Suep', 'Laki-Laki', '212121', '2023-08-16', 'dawdwa', '2023-08-22 01:21:38', '2023-08-21 18:21:38');
 
 -- --------------------------------------------------------
 
@@ -300,7 +301,8 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nisn`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
-(19, '75675678', 'muhamad', 'Laki-Laki', NULL, '1995-02-06', 'jkjhkhjhmhjmjhj', '2023-07-26 17:02:03', '2023-07-26 10:02:03');
+(19, '75675678', 'muhamad', 'Laki-Laki', NULL, '1995-02-06', 'jkjhkhjhmhjmjhj', '2023-07-26 17:02:03', '2023-07-26 10:02:03'),
+(20, '2212111', 'sukem', 'Laki-Laki', '2112121221', '2023-08-24', 'dwadaw', '2023-08-22 01:23:24', '2023-08-21 18:23:24');
 
 -- --------------------------------------------------------
 
@@ -361,7 +363,9 @@ INSERT INTO `users` (`id`, `no_anggota`, `name`, `jk`, `username`, `role`, `emai
 (146, 2, 'kaperpus', 'Perempuan', 'kaperpus', 'kaperpus', 'kaperpus@gmail.com', NULL, '$2y$10$5CAT5Hg1/bXIDIL7H7Xod.R.LCjlIuMNh/VYy6vq1a9tEZkOMMToy', NULL, NULL, '2023-01-12 02:07:45', '2023-07-26 08:08:08'),
 (174, 21, 'Muhammad Budiman', 'Laki-Laki', 'budi', 'guru', 'budi@gmail.com', NULL, '$2y$10$.vMazNaPrDqe5ez.ssRwFeHxv0vwI.p9TlX/4Zd6xqIcD85TWd3iC', NULL, NULL, '2023-07-26 06:33:26', '2023-07-26 06:33:26'),
 (175, 22, 'Hj. Ade Erma Suryani, S.Pd', 'Perempuan', 'adeerma', 'guru', 'adeerma@gmail.com', NULL, '$2y$10$MvZ3IePJWYiNcfyUEaOFIeKixbM/V9NMjt93MayNdiR21WaNmP5.e', NULL, NULL, '2023-07-26 06:44:04', '2023-07-26 06:44:04'),
-(182, 19, 'muhamad', 'Laki-Laki', 'maul', 'siswa', NULL, NULL, '$2y$10$hkkms5Myu49DHw1YgI.vy.yw0ajH71SCKyfJimY8v9YMgf8Ld.wwS', NULL, NULL, '2023-07-26 10:02:03', '2023-07-26 10:02:03');
+(182, 19, 'muhamad', 'Laki-Laki', 'maul', 'siswa', NULL, NULL, '$2y$10$hkkms5Myu49DHw1YgI.vy.yw0ajH71SCKyfJimY8v9YMgf8Ld.wwS', NULL, NULL, '2023-07-26 10:02:03', '2023-07-26 10:02:03'),
+(183, 25, 'Suep', 'Laki-Laki', 'suep', 'guru', NULL, NULL, '$2y$10$/1Eb6nDy5lAmVGm7ocbfueAQzZbZP0hzYXMVvt4wzvrTGNsO5KZiO', NULL, NULL, '2023-08-21 18:21:38', '2023-08-21 18:21:38'),
+(184, 20, 'sukem', 'Laki-Laki', 'sukem', 'siswa', NULL, NULL, '$2y$10$.BuoJByGXMxp3xmLRrwIg.RV1TWltnrb1MWMZqG.7ew4rGLCsCdni', NULL, NULL, '2023-08-21 18:23:24', '2023-08-21 18:23:24');
 
 --
 -- Indexes for dumped tables
@@ -469,7 +473,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `kepala_perpustakaan`
@@ -499,7 +503,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
@@ -511,7 +515,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
