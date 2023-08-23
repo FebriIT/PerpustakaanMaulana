@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    
+
 
 
     <div class="col-12">
@@ -73,7 +73,7 @@
                                         <a href="/{{ auth()->user()->role }}/anggota/{{ $row->id }}/cetak" class="btn btn-icon btn-sm btn-primary" target="_blank" title="Cetak Anggota"><i class="far fa-folder-open"></i></a>
                                         <a href="/{{ auth()->user()->role }}/anggota/{{ $row->id }}/edit" class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i></a>
                                         <a href="/admin/anggota/{{ $row->id }}/destroy" onclick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                                    
+
                                     </td>
                                 </tr>
 

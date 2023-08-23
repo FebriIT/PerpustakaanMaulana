@@ -57,8 +57,5 @@ class User extends Authenticatable
         return asset('storage/avatar/' . auth()->user()->name . '/' . $this->avatar);
     }
 
-    public function guru()
-    {
-        $this->hasMany(Guru::class);
-    }
+    
 }

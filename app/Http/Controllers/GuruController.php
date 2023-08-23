@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
-     
 
-    
+
+
      public function index()
     {
         $data=User::where('role','admin')->orwhere('role','kaperpus')->get();
@@ -45,16 +45,16 @@ class GuruController extends Controller
         ]);
         // dd($request->all());
         $data=new User;
-        
+
         $data->jk=$request->jk;
         $data->name=$request->name;
         $data->username=$request->username;
         $data->role=$request->role;
         $data->password=bcrypt($request->password);
-        
+
         if($request->role=='guru'){
             $guru=new Guru();
-        
+
             $guru->nip=$request->nipnisn;
             $guru->nama=$request->name;
             $guru->jk=$request->jk;
@@ -65,7 +65,7 @@ class GuruController extends Controller
             $data->no_anggota=$guru->id;
         }elseif($request->role=='siswa'){
              $siswa=new Siswa();
-            
+
             $siswa->nisn=$request->nipnisn;
             $siswa->nama=$request->name;
             $siswa->jk=$request->jk;
@@ -76,7 +76,7 @@ class GuruController extends Controller
             $data->no_anggota=$siswa->id;
 
         }
-        
+
         $data->save();
 
         return redirect('/admin/anggota')->with('sukses','Data Berhasil Disimpan');
@@ -93,10 +93,10 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-        
+
         $data=User::find($id);
-        
-        
+
+
         if($data->role=='siswa'){
             Siswa::find($data->no_anggota)->update([
                 'nisn'=>$request->nisn,
@@ -134,23 +134,18 @@ class GuruController extends Controller
             $siswa=Siswa::find($user->no_anggota);
             $siswa->delete();
         }
-        
+
         $transaksi=Transaksi::where('user_id',$id)->delete();
-        
+
         $user->delete();
         return redirect()->route('anggota.index')->with('sukses','Data Berhasil Dihapus');
     }
 
     public function cetak($id) {
         $p=User::find($id);
-        // dd($p->name);
-        // $p=DB::select('SELECT transaksi.*,users.name,users.jk,users.no_anggota,users.nohp FROM transaksi JOIN users ON transaksi.user_id=users.id  WHERE transaksi.status="Kembali" AND transaksi.created_at BETWEEN ? AND ?',[$req->mulai,$req->akhir]);
-        // dd($ps);
-        view()->share('p', $p);
-        // dd('ok');
-        $pdf_doc = PDF::loadView('laporan.kartuanggota', compact('p',))->setPaper('catalog #10 1/2 envelope','portrait');
-        // $pdf_doc = PDF::loadView('laporan.kartuanggota', compact('p',))->setPaper([0, 0, 55, 88], 'landscape');
-        return $pdf_doc->stream('laporan-kartuanggota.pdf');
-
+        $siswa=Siswa::find($p->no_anggota);
+        $guru=Guru::find($p->no_anggota);
+        return view('guru.cetak',compact('p','siswa','guru'));
     }
+
 }

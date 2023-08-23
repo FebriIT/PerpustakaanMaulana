@@ -73,7 +73,7 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::get('kaperpus/{id}/edit', [KaperpusController::class,'edit']);
     Route::post('kaperpus/{id}/update', [KaperpusController::class,'update'])->name('kaperpus.update');
     Route::get('kaperpus/{id}/destroy', [KaperpusController::class,'destroy']);
-    
+
     // Route::resource('petugas',[], UserController::class);
     // Route::resource('transaksi', TransaksiController::class);
     // Route::resource('buku', BukuController::class);
@@ -165,7 +165,7 @@ Route::prefix('guru')->middleware('auth', 'role:guru')->group(function () {
 });
 Route::prefix('kaperpus')->middleware('auth', 'role:kaperpus')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.kaperpus');
-    
+
     Route::get('/buku',[BukuController::class,'index']);
     Route::get('/buku/{id}/edit',[BukuController::class,'edit']);
     Route::post('/buku/{d}/update',[BukuController::class,'update']);
@@ -184,8 +184,16 @@ Route::prefix('kaperpus')->middleware('auth', 'role:kaperpus')->group(function (
 
     Route::get('/laporanbuku', [LaporanController::class,'laporanbuku']);
     Route::get('/laporantransaksi', [LaporanController::class,'laporantransaksi']);
-    
+
     Route::post('/laporanbuku/download',[LaporanController::class,'dwbuku'] );
     Route::post('/laporantransaksi/download',[LaporanController::class,'dwtransaksi'] );
+
+      Route::get('/anggota',[GuruController::class,'index'])->name('anggota.index');
+    Route::get('/anggota/create',[GuruController::class,'create']);
+    Route::post('anggota/store', [GuruController::class,'store'])->name('anggota.store');
+    Route::get('anggota/{id}/edit', [GuruController::class,'edit']);
+    Route::post('anggota/{id}/update', [GuruController::class,'update'])->name('anggota.update');
+    Route::get('anggota/{id}/destroy', [GuruController::class,'destroy']);
+    Route::get('anggota/{id}/cetak', [GuruController::class,'cetak']);
 });
 
