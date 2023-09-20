@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('template/assets/css/components.css') }}">
 
     <link rel="stylesheet" href="{{ asset('js/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('template/assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
 
 </head>
 
@@ -66,8 +67,10 @@
 
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
-    
+
     <script src="{{asset('template/assets/js/page/modules-chartjs.js')}}"></script>
+<script src="{{ asset('template/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
 
 
     @yield('js')

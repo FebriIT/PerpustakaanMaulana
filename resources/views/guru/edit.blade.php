@@ -16,8 +16,8 @@
                 </ul>
             </div>
         @endif
-        
-        <form action="/{{ auth()->user()->role }}/anggota/{{ $data->id }}/update" method="POST">
+
+        <form action="/{{ auth()->user()->role }}/guru/{{ $data->id }}/update" method="POST">
 
             @csrf
             <div class="row">
@@ -42,7 +42,7 @@
                      <label>Nama <span style="color:red;">*</span></label>
 
                      <input type="text" name="name" class="form-control" value="{{ $data->name }}" required>
-                     
+
 
                     </div>
 
@@ -60,7 +60,7 @@
 
 
 
-                   
+
 
                 </div>
                 <div class="col-6">
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <a href="/{{ auth()->user()->role }}/anggota" class="btn btn-warning ">Kembali</a>
+            <a href="/{{ auth()->user()->role }}/guru" class="btn btn-warning ">Kembali</a>
             <button type="reset" class="btn btn-danger">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Simpan</button>
         </form>

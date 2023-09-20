@@ -8,66 +8,85 @@
     </div>
     <div class="card-body">
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
-        <form action="{{ route('siswa.update',$data->id) }}" method="POST">
+
+        <form action="/{{ auth()->user()->role }}/siswa/{{ $data->id }}/update" method="POST">
+
             @csrf
             <div class="row">
                 <div class="col-6">
-                    
+
                     <div class="form-group">
-                        <label>NISN</label>
-                        <input type="number" name="nisn" class="form-control" value="{{ $data->nisn }}" required>
+
+
+                        <label>NISN <span style="color:red;">*</span></label>
+
+                        <input type="number" name="nisn" class="form-control" value="{{ $siswa->nisn }}" required>
                     </div>
                     <div class="form-group">
-                        <label>Nama</label>
-                        <input type="text" name="nama" class="form-control" value="{{ $data->nama }}" required>
+                        <label>Nama <span style="color:red;">*</span></label>
+
+                        <input type="text" name="name" class="form-control" value="{{ $data->name }}" required>
+
+
                     </div>
 
                     <div class="form-group">
-                        <label>Jenis Kelamin</label>
+                        <label>Jenis Kelamin <span style="color:red;">*</span></label>
+
                         <select class="form-control" name="jk" required>
                             <option value="">-Pilih-</option>
-                            <option @if($data->jk=='Laki-Laki') selected @endif value="Laki-Laki">Laki-Laki</option>
-                            <option @if($data->jk=='Perempuan') selected @endif value="Perempuan">Perempuan</option>
+                            <option value="Laki-Laki" @if(auth()->user()->jk=='Laki-Laki')selected @endif>Laki-Laki</option>
+                            <option value="Perempuan" @if(auth()->user()->jk=='Perempuan')selected @endif>Perempuan</option>
+
+
                         </select>
                     </div>
-                    
-                    
+
+
+
+
+
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label>Umur</label>
-                        <input type="number" name="umur"  value="{{ $data->umur }}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label>Nomor HP</label>
-                        <input type="number" name="nohp"  value="{{ $data->nohp }}" class="form-control" required>
+                        <input type="number" name="nohp" class="form-control" value="{{ $siswa->nohp }}">
+
                     </div>
-                    
-                    
+
                     <div class="form-group">
-                        <label>Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" value="{{ $data->tgl_lahir }}" class="form-control" required>
+                        <label>Tanggal Lahir <span style="color:red;">*</span></label>
+
+                        <input type="date" name="tgl_lahir" class="form-control" value="{{ $siswa->tgl_lahir }}" required>
+
                     </div>
                     <div class="form-group">
-                        <label>Alamat</label>
-                        <textarea name="alamat" class="form-control" id="" cols="10" rows="20">{{ $data->alamat }}</textarea>
+                        <label>Alamat <span style="color:red;">*</span></label>
+
+
+                        <textarea name="alamat" class="form-control" id="" cols="10" rows="20">{{ $siswa->alamat }}</textarea>
+
                     </div>
-                    
+
+
+
                 </div>
             </div>
-            {{-- {{ method_field('put') }} --}}
 
-            <a href="/{{ auth()->user()->role }}/anggota" class="btn btn-warning ">Kembali</a>
+            <a href="/{{ auth()->user()->role }}/siswa" class="btn btn-warning ">Kembali</a>
+            <button type="reset" class="btn btn-danger">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Simpan</button>
         </form>
+
     </div>
 </div>
 @endsection
+

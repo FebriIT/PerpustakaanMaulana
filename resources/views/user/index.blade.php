@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="row">
-    
 
-   
+
+
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -21,53 +21,47 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Kode Anggota</th>
-                                    <th scope="col">NIP/NISN</th>
+                                    <th scope="col">NIP</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">No HP</th>
                                     <th scope="col">Jenis Kelamin</th>
                                     <th scope="col">Hak Akses</th>
-                                    
+
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $key=>$row)
                                 @php
-                                $admin=\App\Models\Admin::find($row->no_anggota);
-
+                                $admin=\App\Models\Admin::find($row->user_id);
+                                // dd($row->user_id);
                                 //dd($dsiswa);
-                                $kaperpus=\App\Models\Kaperpus::find($row->no_anggota);
+                                $kaperpus=\App\Models\Kaperpus::find($row->user_id);
 
                                 @endphp
 
                                 <tr>
                                     <td>{{ ++$key }}</td>
+
+                                    <td>{{ $row->no_anggota }}</td>
                                     @if($row->role=='admin')
-                                    <td>AD{{ $row->id }}</td>
-                                    @elseif($row->role=='kaperpus')
-                                    <td>KP{{ $row->id }}</td>
-                                    @endif
-                                    @if($row->role=='admin')
-                                    
+
                                         <td>{{ $admin->nip }}</td>
-
-
                                     @elseif($row->role=='kaperpus')
                                         <td>{{ $kaperpus->nip }}</td>
-                                    
+
                                     @endif
-                                    
+
                                     <td>{{ $row->name }}</td>
                                     @if($row->role=='admin')
                                         <td>{{ $admin->nohp }}</td>
                                     @elseif($row->role=='kaperpus')
                                         <td>{{ $kaperpus->nohp }}</td>
-
                                     @endif
 
                                     {{-- <td>{{ $row->nohp }}</td> --}}
                                     <td>{{ $row->jk }}</td>
-                                    
+
                                     <td>{{ $row->role }}</td>
 
                                     <td>
@@ -89,7 +83,7 @@
         </div>
     </div>
 
-    
+
 </div>
 
 @endsection

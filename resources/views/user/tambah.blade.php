@@ -74,7 +74,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Username <span style="color:red;">*</span></label>
 
                         <input type="text" name="username" class="form-control" required>
@@ -83,7 +83,7 @@
                         <label>Password <span style="color:red;">*</span></label>
 
                         <input type="password" name="password" class="form-control" required>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

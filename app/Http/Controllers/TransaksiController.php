@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Mockery\Matcher\Not;
 
 class TransaksiController extends Controller
@@ -65,7 +66,7 @@ class TransaksiController extends Controller
                 // dd($row);
 
 
-                }   
+                }
 
         $tglsekarang=date('d', strtotime(now()));
         $blnsekarang=date('m', strtotime(now()));
@@ -90,8 +91,9 @@ class TransaksiController extends Controller
 
         }
 
+        $datenow=Carbon::now();
 
-        return view('transaksi.index',compact('transaksi','tglsekarang'));
+        return view('transaksi.index',compact('transaksi','tglsekarang','datenow'));
     }
 
     /**
@@ -117,9 +119,9 @@ class TransaksiController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            
+
             'kode_transaksi'=>'unique:transaksi,kode_transaksi|max:50',
-           
+
 
         ]);
         $data= new Transaksi;
@@ -135,6 +137,8 @@ class TransaksiController extends Controller
         $data->status='Dipinjam';
         $data->ket=$request->ket;
         $data->save();
+
+
         return redirect('/'.auth()->user()->role.'/transaksi')->route('transaksi.index')->with('sukses','Data Berhasil Ditambah');
     }
 
@@ -170,13 +174,28 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         $data=Transaksi::find($id);
+        $datenow=Carbon::now();
+        $jarak=strtotime($datenow->format('Y-m-d'))-strtotime($data->tgl_kembali);
+        if($jarak>0){
+            $totalhari=$jarak / 60 / 60 / 24;
+            $denda = $totalhari* 1000;
+        }else{
+            $totalhari=0;
+            $denda =0;
+        }
+
+
         $buku=Buku::find($data->buku_id);
         $stokbukuberkurang=$buku->jumlah_buku+1;
-        // dd($stokbukuberkurang);
+        // dd($totalhari);
         $buku->update([
             'jumlah_buku'=>$stokbukuberkurang
         ]);
-        $data->update(['status'=>'Dikembalikan']);
+        $data->update([
+            'status'=>'Dikembalikan',
+            'totalterlambat'=>$totalhari,
+            'denda'=>$denda
+        ]);
         return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Diubah');
     }
 
@@ -193,7 +212,7 @@ class TransaksiController extends Controller
         $data->delete();
         return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Dihapus');
     }
-// 
+//
     public function transaksibaru()
     {
         $buku=Buku::orderBy('id','desc')->get();

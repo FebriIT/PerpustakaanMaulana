@@ -51,13 +51,14 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function () {
     Route::get('user/{id}/edit', [UserController::class,'edit']);
     Route::post('user/{id}/update', [UserController::class,'update'])->name('user.update');
 
-    Route::get('/anggota',[GuruController::class,'index'])->name('anggota.index');
-    Route::get('/anggota/create',[GuruController::class,'create']);
-    Route::post('anggota/store', [GuruController::class,'store'])->name('anggota.store');
-    Route::get('anggota/{id}/edit', [GuruController::class,'edit']);
-    Route::post('anggota/{id}/update', [GuruController::class,'update'])->name('anggota.update');
-    Route::get('anggota/{id}/destroy', [GuruController::class,'destroy']);
-    Route::get('anggota/{id}/cetak', [GuruController::class,'cetak']);
+    Route::get('/guru',[GuruController::class,'index'])->name('guru.index');
+    Route::get('/guru/create',[GuruController::class,'create']);
+    Route::post('guru/store', [GuruController::class,'store'])->name('guru.store');
+    Route::get('guru/{id}/edit', [GuruController::class,'edit']);
+    Route::post('guru/{id}/update', [GuruController::class,'update'])->name('guru.update');
+    Route::get('guru/{id}/destroy', [GuruController::class,'destroy']);
+    Route::get('guru/{id}/cetak', [GuruController::class,'cetak']);
+    Route::get('siswa/{id}/cetak', [GuruController::class,'cetak']);
 
 
     Route::get('/siswa',[SiswaController::class,'index']);

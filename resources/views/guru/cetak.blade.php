@@ -64,11 +64,7 @@
                     Siswa
                     @endif
                     <br>
-                     @if($p->role=='guru')
-                     Kode Anggota : GR{{ $p->id }}
-                     @elseif($p->role=='siswa')
-                     Kode Anggota : SW{{ $p->id }}
-                     @endif
+                     Kode Anggota : {{ $p->no_anggota }}
 
 
                 </td>

@@ -7,11 +7,17 @@ use App\Models\Buku;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        // Http::asForm()->post('https://app.whacenter.com/api/send',[
+        //     'device_id'=>'962984a11858bb6e7df91d9012c9be79',
+        //     'number'=>'085266911477',
+        //     'message'=>'Mantap',
+        // ]);
         $buku=Buku::all()->count();
         if(auth()->user()->role=='admin'||auth()->user()->role=='kaperpus'){
 

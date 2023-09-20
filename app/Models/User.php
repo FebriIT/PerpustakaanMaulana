@@ -27,7 +27,8 @@ class User extends Authenticatable
         'no_anggota',
         'jk',
         'nohp',
-        'akses'
+        'akses',
+        'user_id'
     ];
 
     /**
@@ -57,5 +58,5 @@ class User extends Authenticatable
         return asset('storage/avatar/' . auth()->user()->name . '/' . $this->avatar);
     }
 
-    
+
 }

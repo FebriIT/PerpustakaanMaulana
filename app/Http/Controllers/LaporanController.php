@@ -33,7 +33,7 @@ class LaporanController extends Controller
         return view('laporan.laporandenda');
     }
     public function laporanpendaftaran(){
-        $bulan=Guru::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        $bulan=Siswa::select(DB::raw("MONTHNAME(created_at) as bulan"))
         ->GroupBy(DB::raw("MONTHNAME(created_at)"))
         ->pluck('bulan');
 
@@ -47,7 +47,7 @@ class LaporanController extends Controller
         ->GroupBy(DB::raw("Month(created_at)"))
         ->pluck('total');
         // dd($total_guru);
-        
+
         return view('laporan.laporanpendaftaran',compact('bulan','total_guru','total_siswa'));
     }
 
@@ -137,6 +137,7 @@ class LaporanController extends Controller
         ->where('status','Terlambat')
         ->whereBetween('created_at',[$mulai,$akhir])
         ->count();
+        // dd($dcount);
 
         view()->share('p', $p);
 

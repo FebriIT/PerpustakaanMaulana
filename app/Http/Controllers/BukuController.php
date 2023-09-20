@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Buku;
+use App\Models\Guru;
+use App\Models\Kaperpus;
 use App\Models\Kategori;
 use App\Models\Peminjaman;
+use App\Models\Siswa;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
-
-
+use Illuminate\Support\Facades\Http;
 
 class BukuController extends Controller
 {
@@ -186,7 +189,7 @@ class BukuController extends Controller
     public function pinjamstore(Request $req)
     {
 
-
+        // dd($req->all());
         // dd(Transaksi::all()->last()->id);
         $transaksi=new Transaksi;
         $transaksi->user_id=$req->user_id;
@@ -195,17 +198,47 @@ class BukuController extends Controller
         $transaksi->tgl_pinjam=$datenow;
         $transaksi->tgl_kembali=$req->tgl_kembali;
         $transaksi->status='Dipinjam';
-        
+
         $kodebaran=Transaksi::all()->count();
-        $transaksi->kode_transaksi='TRS'.$kodebaran.$req->buku_id.$req->user_id.Transaksi::all()->last()->id;
+        if($kodebaran!=0){
+            $lasts=Transaksi::all()->last()->id;
+            $last=str_pad($lasts,4,'0',STR_PAD_LEFT);
+
+        }else{
+            $last=str_pad(1,4,'0',STR_PAD_LEFT);
+        }
+        // dd($kodebaran);
+        $transaksi->kode_transaksi='TRS'.$kodebaran.$req->buku_id.$req->user_id.$last;
         //kondisi stok buku berkurang
         $buku=Buku::find($req->buku_id);
 
         $stokbukuberkurang=$buku->jumlah_buku-1;
-        $buku->update([
+
+
+        $user=User::find($req->user_id);
+        if($user->role=='guru'){
+            $nohp=Guru::find($user->user_id)->nohp;
+        }elseif($user->role=='siswa'){
+            $nohp=Siswa::find($user->user_id)->nohp;
+
+        }elseif($user->role=='kaperpus'){
+            $nohp=Kaperpus::find($user->user_id)->nohp;
+
+        }elseif($user->role=='admin'){
+            $nohp=Admin::find($user->user_id)->nohp;
+
+        }
+        // dd($nohp);
+        Http::asForm()->post('https://app.whacenter.com/api/send',[
+           'device_id'=>'9326476ab398d8c7c6195ab3442e129a',
+           'number'=>$nohp,
+           'message'=>'E-Perpustakaan SMA Negeri 8 Merangin : Anda meminjam buku '.$buku->judul.' dengan kode buku '.$buku->kode_buku.'. Silahkan kembalikan buku sebelum tanggal '.$req->tgl_kembali.'.',
+       ]);
+       $buku->update([
             'jumlah_buku'=>$stokbukuberkurang
         ]);
         $transaksi->save();
+
 
         return redirect('/'.auth()->user()->role.'/transaksi')->with('sukses','Data Berhasil Ditambahkan');
     }

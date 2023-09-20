@@ -16,8 +16,16 @@
                     <li class="{{ (request()->is('admin/guru')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/guru">Data Guru</a></li>
                     <li class="{{ (request()->is('admin/siswa')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/siswa">Data Siswa</a></li>  --}}
                     <li class="{{ (request()->is('admin/user')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/user">Data User</a></li>
-                    <li class="{{ (request()->is('admin/anggota')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/anggota">Data Anggota</a></li>
+                    {{-- <li class="{{ (request()->is('admin/anggota')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/anggota">Data Anggota</a></li> --}}
                     <li class="{{ (request()->is('admin/buku')) ? 'active' : '' }}"><a class="nav-link" href="/admin/buku">Data Buku</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown {{ (request()->is('admin/siswa','admin/guru')) ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fa fa-folder"></i><span>Kelola Anggota</span></a>
+
+                <ul class="dropdown-menu">
+                    <li class="{{ (request()->is('admin/siswa')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/siswa">Data Siswa</a></li>
+                    <li class="{{ (request()->is('admin/guru')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/guru">Data Guru</a></li>
                 </ul>
             </li>
 
@@ -63,24 +71,14 @@
                 </ul>
             </li>
 
-            @elseif (auth()->user()->role=='siswa'||auth()->user()->role=='guru')
+            @elseif (auth()->user()->role=='siswa')
             <li class="{{ (request()->is('user/dashboard')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-
-            <li class="{{ (request()->is('user/buku')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/buku"><i class="far fa-square"></i> <span>Data Buku</span></a></li>
-
+            <li class="{{ (request()->is('user/buku')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/buku"><i class="fa fa-folder"></i> <span>Data Buku</span></a></li>
+            <li class="{{ (request()->is('user/transaksi')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/transaksi"><i class="fa fa-heart"></i> <span>Lihat Peminjaman</span></a></li>
+            @elseif (auth()->user()->role=='guru')
+            <li class="{{ (request()->is('user/dashboard')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+            <li class="{{ (request()->is('user/buku')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/buku"><i class="fa fa-folder"></i> <span>Data Buku</span></a></li>
             <li class="{{ (request()->is('user/transaksi')) ? 'active' : '' }}"><a class="nav-link" href="/{{ auth()->user()->role }}/transaksi"><i class="fa fa-heart"></i> <span>Kelola Peminjaman</span></a></li>
-
-
-
-
-            {{-- <li class="nav-item dropdown {{ (request()->is('user/peminjaman','user/pengembalian')) ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Laporan</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ (request()->is('user/laporananggota')) ? 'active' : '' }}" ><a class="nav-link" href="/user/laporananggota">Laporan Anggota</a></li>
-                    <li class="{{ (request()->is('user/laporanbuku')) ? 'active' : '' }}"><a class="nav-link" href="/user/laporanbuku">Laporan Buku</a></li>
-                    <li class="{{ (request()->is('user/laporantransaksi')) ? 'active' : '' }}"><a class="nav-link" href="/user/laporantransaksi">Laporan Transaksi</a></li>
-                </ul>
-            </li> --}}
             @endif
         </ul>
     </aside>

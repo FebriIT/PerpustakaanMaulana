@@ -8,6 +8,7 @@ use App\Models\Kaperpus;
 use App\Models\Siswa;
 use App\Models\Transaksi;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,9 +35,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data=User::all()->last()->no_anggota+1;
+        // $data=User::all()->last()->no_anggota+1;
         // dd($data);
-        return view('user.tambah',compact('data'));
+        // $datenow=Carbon::now();
+        return view('user.tambah');
     }
 
     /**
@@ -50,23 +52,19 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|max:50',
             'no_anggota'=>'unique:users,no_anggota|max:50',
-            'username'=>'required|unique:users|max:50',
             'nohp' => 'required|max:13',
             'role' => 'required',
-
         ]);
-        // dd($request->all());
+        $date = Carbon::createFromFormat('Y-m-d', $request->tgl_lahir);
+        $pwdefault=$date->format('d').$date->format('m').$date->format('Y');
         $data=new User;
-        
         $data->jk=$request->jk;
         $data->name=$request->name;
-        $data->username=$request->username;
         $data->role=$request->role;
-        $data->password=bcrypt($request->password);
-        
+        $data->password=bcrypt($pwdefault);
+
         if($request->role=='admin'){
             $guru=new Admin();
-        
             $guru->nip=$request->nip;
             $guru->nama=$request->name;
             $guru->jk=$request->jk;
@@ -74,10 +72,13 @@ class UserController extends Controller
             $guru->tgl_lahir=$request->tgl_lahir;
             $guru->nohp=$request->nohp;
             $guru->save();
-            $data->no_anggota=$guru->id;
-        }elseif($request->role=='kaperpus'){
-             $siswa=new Kaperpus();
-            
+            $nounique=str_pad($guru->id,4,'0',STR_PAD_LEFT);
+            $datenow=Carbon::now()->format('Y');
+            $nouniquee='91'.$datenow.$nounique;
+            $data->user_id=$guru->id;
+            $data->username=$request->nip;
+        }else if($request->role=='kaperpus'){
+            $siswa=new Kaperpus();
             $siswa->nip=$request->nip;
             $siswa->nama=$request->name;
             $siswa->jk=$request->jk;
@@ -85,10 +86,13 @@ class UserController extends Controller
             $siswa->tgl_lahir=$request->tgl_lahir;
             $siswa->nohp=$request->nohp;
             $siswa->save();
-            $data->no_anggota=$siswa->id;
-
+            $nounique=str_pad($siswa->id,4,'0',STR_PAD_LEFT);
+            $datenow=Carbon::now()->format('Y');
+            $nouniquee='90'.$datenow.$nounique;
+            $data->user_id=$siswa->id;
+            $data->username=$request->nip;
         }
-        
+        $data->no_anggota=$nouniquee;
         $data->save();
 
         return redirect('/admin/user')->with('sukses','Data Berhasil Disimpan');
@@ -114,8 +118,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $data=User::find($id);
-        $admin=Admin::find($data->no_anggota);
-        $kaperpus=Kaperpus::find($data->no_anggota);
+        $admin=Admin::find($data->user_id);
+        $kaperpus=Kaperpus::find($data->user_id);
         return view('user.edit',compact('data','admin','kaperpus'));
     }
 
@@ -129,10 +133,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data=User::find($id);
-        
-        
-        if($data->role=='Admin'){
-            Admin::find($data->no_anggota)->update([
+
+        if($data->role=='admin'){
+            // dd($request->all());
+            Admin::find($data->user_id)->update([
                 'nip'=>$request->nip,
                 'nama'=>$request->name,
                 'jk'=>$request->jk,
@@ -141,7 +145,7 @@ class UserController extends Controller
                 'alamat'=>$request->alamat
             ]);
         }elseif($data->role=='kaperpus'){
-            Kaperpus::find($data->no_anggota)->update([
+            Kaperpus::find($data->user_id)->update([
                 'nip'=>$request->nip,
                 'nama'=>$request->name,
                 'jk'=>$request->jk,
@@ -151,7 +155,7 @@ class UserController extends Controller
             ]);
         }
         $data->update([
-            'nama'=>$request->name,
+            'name'=>$request->name,
             'jk'=>$request->jk,
         ]);
 
@@ -169,18 +173,18 @@ class UserController extends Controller
     {
         $user=User::find($id);
         if($user->role=='guru'){
-            $guru=Admin::find($user->no_anggota);
+            $guru=Admin::find($user->user_id);
             $guru->delete();
         }elseif($user->role=='siswa'){
-            $siswa=Kaperpus::find($user->no_anggota);
+            $siswa=Kaperpus::find($user->user_id);
             $siswa->delete();
         }
-        
+
         // $transaksi=Transaksi::where('user_id',$id)->delete();
-        
+
         $user->delete();
         return redirect()->route('user.index')->with('sukses','Data Berhasil Dihapus');
         $data=User::find($id);
-        
+
     }
 }

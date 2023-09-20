@@ -4,6 +4,7 @@
 <div class="card">
     <div class="card-body">
         <div class="section-title">Data Peminjaman
+
             @if (Auth::user()->role=='admin'||auth()->user()->role=='kaperpus')
 
             <a href="/{{ auth()->user()->role }}/transaksi/create" class="btn btn-sm btn-warning float-right">Transaksi Baru</a>
@@ -30,6 +31,8 @@
                             <th scope="col">Kode Buku</th>
                             <th scope="col">Tgl Pinjam</th>
                             <th scope="col">Tgl Kembali</th>
+                            <th scope="col">Total Terlambat</th>
+                            <th scope="col">Denda</th>
                             <th scope="col">Status</th>
                             @if (Auth::user()->role=='admin' ||auth()->user()->role=='kaperpus')
                             <th scope="col">Action</th>
@@ -38,25 +41,35 @@
                     </thead>
                     <tbody>
                         @foreach ($transaksi as $row)
-                        
+
                         <tr>
                             <td>{{ $row->kode_transaksi }}</td>
-                            @if($row->user->role=='siswa')
-                            <td>SW{{ $row->user->id }}</td>
-                            @elseif($row->user->role=='guru')
-                            <td>GR{{ $row->user->id }}</td>
-                            @elseif($row->user->role=='admin')
-                            <td>AD{{ $row->user->id }}</td>
-                            @elseif($row->user->role=='kaperpus')
-                            <td>KP{{ $row->user->id }}</td>
-
-                            @endif
+                            <td>{{ $row->user->no_anggota }}</td>
                             {{-- <th scope="row"><a href="/{{ Auth::user()->role }}/anggota/{{ $row->user->no_anggota }}/detail">{{ $row->user->no_anggota }}</a> </th> --}}
                             <td>{{ $row->user->name }}</td>
 
                             <td><a href="/{{ Auth::user()->role }}/buku/{{ $row->buku_id }}/detail">{{ $row->buku->kode_buku }}</a></td>
                             <td>{{ $row->tgl_pinjam }}</td>
                             <td>{{ $row->tgl_kembali }}</td>
+                            @php
+
+                                $jarak=strtotime($datenow->format('Y-m-d'))-strtotime($row->tgl_kembali);
+                                if($jarak>0){
+                                    $totalhari=$jarak / 60 / 60 / 24;
+                                    $denda = $totalhari* 1000;
+
+                                }else{
+                                    $totalhari=0;
+                                    $denda =0;
+
+                                }
+
+                                // dd($denda);
+                            @endphp
+                            <td>{{ $totalhari }} hari</td>
+
+                            <td>{{ $denda }}</td>
+
                             @if ($row->status=='Dikembalikan')
                             <td><span class="badge badge-success">{{ $row->status }}</span></td>
                             @elseif($row->status=='Dipinjam')
@@ -91,7 +104,7 @@
 
 
                         </tr>
-                        
+
                         @endforeach
 
                     </tbody>

@@ -4,7 +4,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4>Tambah Anggota</h4>
+        <h4>Tambah Guru</h4>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,13 +16,13 @@
         </div>
     @endif
     <div class="card-body">
-        <form action="{{ route('anggota.store') }}" method="POST">
+        <form action="/{{auth()->user()->role}}/guru/store" method="POST">
             @csrf
             <div class="row">
                 <div class="col-6">
-                    
+
                     <div class="form-group">
-                        <label>NIP/NISN <span style="color:red;">*</span></label>
+                        <label>NIP <span style="color:red;">*</span></label>
 
                         <input type="number" name="nipnisn" class="form-control" required>
                     </div>
@@ -41,40 +41,33 @@
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
-                    
-                    
-                   
+
+
+
                      <div class="form-group">
                          <label>Tanggal Lahir <span style="color:red;">*</span></label>
 
                          <input type="date" name="tgl_lahir" class="form-control" required>
                      </div>
-                     <div class="form-group">
-                         <label>Alamat <span style="color:red;">*</span></label>
 
-                         <textarea name="alamat" class="form-control" id="" cols="10" rows="20"></textarea>
-                     </div>
 
                 </div>
                 <div class="col-6">
-                
+                    <div class="form-group">
+                        <label>Alamat <span style="color:red;">*</span></label>
+
+                        <textarea name="alamat" class="form-control" id="" cols="10" rows="20"></textarea>
+                    </div>
+
                     <div class="form-group">
                         <label>Nomor HP</label>
                         <input type="number" name="nohp" class="form-control" >
                     </div>
 
-                   
-                    <div class="form-group">
-                        <label>Hak Akses <span style="color:red;">*</span></label>
 
-                        <select class="form-control" name="role" required>
-                            <option value="">-Pilih-</option>
-                            <option value="guru">Guru</option>
-                            <option value="siswa">Siswa</option>
-                        </select>
-                    </div>
 
-                    <div class="form-group">
+
+                    {{-- <div class="form-group">
                         <label>Username <span style="color:red;">*</span></label>
 
                         <input type="text" name="username" class="form-control" required>
@@ -83,11 +76,11 @@
                         <label>Password <span style="color:red;">*</span></label>
 
                         <input type="password" name="password" class="form-control" required>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <a href="/{{ auth()->user()->role }}/anggota" class="btn btn-warning ">Kembali</a>
+            <a href="/{{ auth()->user()->role }}/guru" class="btn btn-warning ">Kembali</a>
             <button type="reset" class="btn btn-danger">Reset</button>
             <button type="submit" class="btn btn-primary float-right">Simpan</button>
         </form>

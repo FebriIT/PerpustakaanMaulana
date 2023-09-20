@@ -39,9 +39,9 @@
                      $jarak=strtotime($row->tgl_kembali)-strtotime($row->tgl_pinjam);
 
                         $denda = ($jarak / 60 / 60 / 24 )* 1000;
-                        
+
                         $total+=$denda;
-                    
+
 
                      @endphp
 
