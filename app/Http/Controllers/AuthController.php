@@ -49,10 +49,6 @@ class AuthController extends Controller
                         $data->sendto=$row->user_id;
                         $data->save();
 
-
-                // dd($row);
-
-
                 }
 
 
@@ -64,7 +60,7 @@ class AuthController extends Controller
                     $query->select(DB::raw(1))
                     ->from('notifikasi')
                     ->whereColumn('transaksi.id','notifikasi.transaksi_id');
-                })  
+                })
                 ->get();
 
 
@@ -102,7 +98,7 @@ class AuthController extends Controller
                    $query->select(DB::raw(1))
                    ->from('notifikasi')
                    ->whereColumn('transaksi.id','notifikasi.transaksi_id');
-               })  
+               })
                ->get();
 
 
@@ -133,7 +129,7 @@ class AuthController extends Controller
 
 
                return redirect(route('dashboard.kaperpus'));
-           
+
            } elseif (auth()->user()->role == 'siswa') {
 
                 // $transaksi=Transaksi::where('status','Terlambat')->get();
@@ -141,7 +137,7 @@ class AuthController extends Controller
                    $query->select(DB::raw(1))
                    ->from('notifikasi')
                    ->whereColumn('transaksi.id','notifikasi.transaksi_id');
-               })  
+               })
                ->get();
 
 
@@ -179,7 +175,7 @@ class AuthController extends Controller
                    $query->select(DB::raw(1))
                    ->from('notifikasi')
                    ->whereColumn('transaksi.id','notifikasi.transaksi_id');
-               })  
+               })
                ->get();
 
 

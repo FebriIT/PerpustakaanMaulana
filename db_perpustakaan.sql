@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2023 at 03:32 AM
+-- Generation Time: Sep 20, 2023 at 08:38 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -45,7 +45,9 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `nip`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
 (1, '333213123', 'admin', 'Laki-Laki', '089944922321', '2023-07-18', 'jambi', '2023-07-26 16:46:51', '2023-07-26 14:47:10'),
-(2, '1', 'dadwadwas', 'Laki-Laki', '121231231', '2023-07-18', '21dwadwadaw', '2023-07-26 14:57:07', '2023-07-26 07:57:07');
+(3, '999211212', 'febri', 'Laki-Laki', '21212112', '2023-09-19', 'dwadwadwa', '2023-09-19 13:22:16', '2023-09-19 06:22:16'),
+(4, '221918218', 'wdawdwak', 'Laki-Laki', '0812872112121', '2023-09-13', 'dwadwadaw', '2023-09-19 13:46:32', '2023-09-19 06:46:32'),
+(5, '1029203929122', 'Febrie', 'Laki-Laki', '083293921123', '2000-02-20', 'dadwadwadwa', '2023-09-19 14:28:02', '2023-09-19 08:58:25');
 
 -- --------------------------------------------------------
 
@@ -81,10 +83,9 @@ INSERT INTO `buku` (`id`, `kode_buku`, `judul`, `isbn`, `pengarang`, `penerbit`,
 (42, '45453452', 'Sembilu', '65664786', 'Diana', 'Kaesang', 2015, 10, 'Buku umum', 'Rak 3', 'novel sembilu.jpg.1674583234.jpg', '2023-01-24 11:00:34', '2023-01-24 11:00:34'),
 (43, '3453235', 'Biologi', '3465657346', 'Putranto Abimanyu', 'Casandra', 2018, 49, 'Buku Pelajaran', 'Rak 2', 'biologi.jpg.1674583386.jpg', '2023-01-24 11:03:06', '2023-01-24 11:16:51'),
 (44, '865674745', 'Kimia', '564564547', 'Angga Ferdian', 'Wahyu Prakasa', 2020, 29, 'Buku Pelajaran', 'Rak 2', 'kimia.jpg.1674583493.jpg', '2023-01-24 11:04:53', '2023-01-24 11:16:14'),
-(45, '34452352', 'Matematika', '787856565', 'Sugeng Raharjo', 'Casandra', 2020, 29, 'Buku Pelajaran', 'Rak 3', 'matematika.jpg.1674583643.jpg', '2023-01-24 11:07:23', '2023-07-31 18:01:26'),
-(46, '635634344', 'Ekonomi', '4254353638', 'Diana', 'Wahyu Prakasa', 2021, 29, 'Buku Pelajaran', 'Rak 1', 'ekonomi.jpg.1674583761.jpg', '2023-01-24 11:09:21', '2023-07-31 18:04:46'),
-(47, '8567564564', 'Sosiologi', '675453454', 'boy', 'Kaesang', 2021, 26, 'Buku Pelajaran', 'Rak 5', 'Sosiologi.jpg.1674583867.jpg', '2023-01-24 11:11:07', '2023-07-26 09:45:51'),
-(48, '123', 'TEST', '123', 'TEST', 'TEST', 2023, 5, 'TEST', 'Rak 2', 'tes.png.1690608115.png', '2023-07-28 22:21:55', '2023-07-28 22:21:55');
+(45, '34452352', 'Matematika', '787856565', 'Sugeng Raharjo', 'Casandra', 2020, 30, 'Buku Pelajaran', 'Rak 3', 'matematika.jpg.1674583643.jpg', '2023-01-24 11:07:23', '2023-09-19 21:34:05'),
+(46, '635634344', 'Ekonomi', '4254353638', 'Diana', 'Wahyu Prakasa', 2021, 22, 'Buku Pelajaran', 'Rak 1', 'ekonomi.jpg.1674583761.jpg', '2023-01-24 11:09:21', '2023-09-19 21:31:41'),
+(47, '8567564564', 'Sosiologi', '675453454', 'boy', 'Kaesang', 2021, 26, 'Buku Pelajaran', 'Rak 5', 'Sosiologi.jpg.1674583867.jpg', '2023-01-24 11:11:07', '2023-07-26 09:45:51');
 
 -- --------------------------------------------------------
 
@@ -125,9 +126,7 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id`, `nip`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
-(21, '150502211', 'Muhammad Budiman', 'Laki-Laki', NULL, '2001-01-08', 'Dusun Kali Aro RT 03', '2023-07-26 13:33:26', '2023-07-26 06:33:26'),
-(22, '343435345', 'Hj. Ade Erma Suryani, S.Pd', 'Perempuan', '2112', '2003-06-25', 'gghgfvdfvfdvv', '2023-08-23 13:44:04', '2023-07-26 07:25:17'),
-(25, '2211221', 'Suep', 'Laki-Laki', '212121', '2023-08-16', 'dawdwa', '2023-08-22 01:21:38', '2023-08-21 18:21:38');
+(31, '19920302199802032001', 'Febri', 'Laki-Laki', '085266911477', '2000-02-20', 'febri', '2023-09-19 14:10:26', '2023-09-19 07:10:26');
 
 -- --------------------------------------------------------
 
@@ -146,14 +145,6 @@ CREATE TABLE `kepala_perpustakaan` (
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kepala_perpustakaan`
---
-
-INSERT INTO `kepala_perpustakaan` (`id`, `nip`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
-(2, '197911032008012002', 'kaperpus', 'Perempuan', '0852669114712', '2023-01-12', 'dawdaw', '2023-01-12 09:07:45', '2023-07-26 08:08:24'),
-(3, '54534324234', 'dssdccscs', 'Laki-Laki', '85675775656', '1983-10-10', 'sdsdscdscdcfdvdfv', '2023-07-26 15:14:19', '2023-07-26 08:14:19');
 
 -- --------------------------------------------------------
 
@@ -246,7 +237,11 @@ INSERT INTO `notifikasi` (`id`, `transaksi_id`, `user_id`, `buku_id`, `sendto`, 
 (179, 75, 1, 47, 1, 1, '2023-07-29 04:53:30', '2023-08-11 04:13:33'),
 (180, 75, 1, 47, 1, 1, '2023-07-29 04:53:30', '2023-08-11 04:13:33'),
 (181, 76, 146, 46, 1, 1, '2023-08-09 07:35:50', '2023-08-11 04:13:33'),
-(182, 76, 146, 46, 146, 0, '2023-08-09 07:35:50', '2023-08-09 00:35:50');
+(182, 76, 146, 46, 146, 0, '2023-08-09 07:35:50', '2023-08-09 00:35:50'),
+(185, 78, 205, 45, 1, 0, '2023-09-20 02:26:46', '2023-09-19 19:26:46'),
+(186, 78, 205, 45, 205, 0, '2023-09-20 02:26:46', '2023-09-19 19:26:46'),
+(187, 84, 205, 45, 1, 0, '2023-09-20 06:36:11', '2023-09-19 23:36:11'),
+(188, 84, 205, 45, 205, 0, '2023-09-20 06:36:11', '2023-09-19 23:36:11');
 
 -- --------------------------------------------------------
 
@@ -301,8 +296,7 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nisn`, `nama`, `jk`, `nohp`, `tgl_lahir`, `alamat`, `created_at`, `updated_at`) VALUES
-(19, '75675678', 'muhamad', 'Laki-Laki', NULL, '1995-02-06', 'jkjhkhjhmhjmjhj', '2023-07-26 17:02:03', '2023-07-26 10:02:03'),
-(20, '2212111', 'sukem', 'Laki-Laki', '2112121221', '2023-08-24', 'dwadaw', '2023-08-22 01:23:24', '2023-08-21 18:23:24');
+(26, '150501202020002', 'Febri', 'Laki-Laki', '122121121', '2000-02-20', 'adadwada', '2023-09-19 14:16:10', '2023-09-19 07:16:10');
 
 -- --------------------------------------------------------
 
@@ -318,6 +312,8 @@ CREATE TABLE `transaksi` (
   `tgl_pinjam` date NOT NULL,
   `tgl_kembali` date NOT NULL,
   `status` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `totalterlambat` int(11) DEFAULT 0,
+  `denda` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,11 +322,14 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id`, `user_id`, `buku_id`, `kode_transaksi`, `tgl_pinjam`, `tgl_kembali`, `status`, `created_at`, `updated_at`) VALUES
-(72, 146, 45, 'TRS0', '2023-07-26', '2023-07-27', 'Dikembalikan', '2023-07-26 09:27:31', '2023-07-31 18:01:26'),
-(73, 174, 45, 'TRS145174', '2023-07-26', '2023-07-27', 'Terlambat', '2023-07-26 09:30:50', '2023-07-26 09:35:59'),
-(75, 1, 47, 'TRS247173', '2023-07-18', '2023-07-28', 'Terlambat', '2023-07-26 09:45:51', '2023-07-28 21:57:35'),
-(76, 146, 46, 'TRS34614675', '2023-08-01', '2023-08-15', 'Dipinjam', '2023-07-31 18:04:46', '2023-07-31 18:04:46');
+INSERT INTO `transaksi` (`id`, `user_id`, `buku_id`, `kode_transaksi`, `tgl_pinjam`, `tgl_kembali`, `status`, `totalterlambat`, `denda`, `created_at`, `updated_at`) VALUES
+(78, 205, 45, 'TRS0452050001', '2023-09-17', '2023-09-19', 'Dikembalikan', 1, '1000', '2023-09-19 19:24:30', '2023-09-19 19:47:34'),
+(79, 206, 46, 'TRS1462060078', '2023-09-20', '2023-09-25', 'Dikembalikan', 0, '0', '2023-09-19 19:49:12', '2023-09-19 19:52:39'),
+(80, 205, 46, 'TRS2462050079', '2023-09-20', '2023-09-21', 'Dipinjam', 0, '0', '2023-09-19 21:24:42', '2023-09-19 21:24:42'),
+(81, 205, 46, 'TRS3462050080', '2023-09-20', '2023-09-27', 'Dipinjam', 0, '0', '2023-09-19 21:26:39', '2023-09-19 21:26:39'),
+(82, 205, 46, 'TRS4462050081', '2023-09-20', '2023-09-27', 'Dipinjam', 0, '0', '2023-09-19 21:27:54', '2023-09-19 21:27:54'),
+(83, 205, 46, 'TRS5462050082', '2023-09-20', '2023-09-27', 'Dipinjam', 0, '0', '2023-09-19 21:31:41', '2023-09-19 21:31:41'),
+(84, 205, 45, 'TRS6452050083', '2023-09-18', '2023-09-19', 'Terlambat', 0, '0', '2023-09-19 21:34:05', '2023-09-19 23:35:59');
 
 -- --------------------------------------------------------
 
@@ -340,7 +339,8 @@ INSERT INTO `transaksi` (`id`, `user_id`, `buku_id`, `kode_transaksi`, `tgl_pinj
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `no_anggota` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `no_anggota` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jk` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `username` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -358,14 +358,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `no_anggota`, `name`, `jk`, `username`, `role`, `email`, `email_verified_at`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Admins', 'Perempuan', 'admin', 'admin', 'admin@admin.com', NULL, '$2y$10$e.rRYSuR51DjSlO/DuU0Uuq8vJtJY5QdPnGG1vyLVfplbE9styoOe', NULL, NULL, '2021-10-16 23:34:06', '2022-02-27 23:14:46'),
-(146, 2, 'kaperpus', 'Perempuan', 'kaperpus', 'kaperpus', 'kaperpus@gmail.com', NULL, '$2y$10$5CAT5Hg1/bXIDIL7H7Xod.R.LCjlIuMNh/VYy6vq1a9tEZkOMMToy', NULL, NULL, '2023-01-12 02:07:45', '2023-07-26 08:08:08'),
-(174, 21, 'Muhammad Budiman', 'Laki-Laki', 'budi', 'guru', 'budi@gmail.com', NULL, '$2y$10$.vMazNaPrDqe5ez.ssRwFeHxv0vwI.p9TlX/4Zd6xqIcD85TWd3iC', NULL, NULL, '2023-07-26 06:33:26', '2023-07-26 06:33:26'),
-(175, 22, 'Hj. Ade Erma Suryani, S.Pd', 'Perempuan', 'adeerma', 'guru', 'adeerma@gmail.com', NULL, '$2y$10$MvZ3IePJWYiNcfyUEaOFIeKixbM/V9NMjt93MayNdiR21WaNmP5.e', NULL, NULL, '2023-07-26 06:44:04', '2023-07-26 06:44:04'),
-(182, 19, 'muhamad', 'Laki-Laki', 'maul', 'siswa', NULL, NULL, '$2y$10$hkkms5Myu49DHw1YgI.vy.yw0ajH71SCKyfJimY8v9YMgf8Ld.wwS', NULL, NULL, '2023-07-26 10:02:03', '2023-07-26 10:02:03'),
-(183, 25, 'Suep', 'Laki-Laki', 'suep', 'guru', NULL, NULL, '$2y$10$/1Eb6nDy5lAmVGm7ocbfueAQzZbZP0hzYXMVvt4wzvrTGNsO5KZiO', NULL, NULL, '2023-08-21 18:21:38', '2023-08-21 18:21:38'),
-(184, 20, 'sukem', 'Laki-Laki', 'sukem', 'siswa', NULL, NULL, '$2y$10$.BuoJByGXMxp3xmLRrwIg.RV1TWltnrb1MWMZqG.7ew4rGLCsCdni', NULL, NULL, '2023-08-21 18:23:24', '2023-08-21 18:23:24');
+INSERT INTO `users` (`id`, `user_id`, `no_anggota`, `name`, `jk`, `username`, `role`, `email`, `email_verified_at`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 1, '1', 'Admins', 'Perempuan', 'admin', 'admin', 'admin@admin.com', NULL, '$2y$10$e.rRYSuR51DjSlO/DuU0Uuq8vJtJY5QdPnGG1vyLVfplbE9styoOe', NULL, NULL, '2021-10-16 23:34:06', '2022-02-27 23:14:46'),
+(205, 31, '2020230031', 'Febri', 'Laki-Laki', '19920302199802032001', 'guru', NULL, NULL, '$2y$10$63KxLOk.hhHny85dyCf8sOvk5nrqTjO7X00LPhFgOgZdcBWTWwjlO', NULL, NULL, '2023-09-19 07:10:26', '2023-09-19 07:10:26'),
+(206, 26, '1020230026', 'Febri', 'Laki-Laki', '150501202020002', 'siswa', NULL, NULL, '$2y$10$Zfb2Qdyg.FB0nOaR7rQ8iutmSzR.7oG8KMOEIjepBqy8ckVKEIQv.', NULL, NULL, '2023-09-19 07:16:10', '2023-09-19 07:16:10'),
+(207, 5, '9120230005', 'Febrie', 'Laki-Laki', '1029203929122', 'admin', NULL, NULL, '$2y$10$LCRnYtuclmmWyuSWP8xYQu5.bORW6uU667vaOLEXXJW121gp.PL.K', NULL, NULL, '2023-09-19 07:28:02', '2023-09-19 08:58:25');
 
 --
 -- Indexes for dumped tables
@@ -455,7 +452,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `buku`
@@ -473,13 +470,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `kepala_perpustakaan`
 --
 ALTER TABLE `kepala_perpustakaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -491,7 +488,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifikasi`
 --
 ALTER TABLE `notifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -503,19 +500,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

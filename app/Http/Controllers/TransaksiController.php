@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Buku;
 use App\Models\Anggota;
+use App\Models\Guru;
+use App\Models\Kaperpus;
 use App\Models\Notifikasi;
 use App\Models\Peminjaman;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
@@ -80,6 +84,24 @@ class TransaksiController extends Controller
                     if($roww->status!='Dikembalikan'){
                         $updatetransaki=Transaksi::find($roww->id)->update([
                             'status'=>'Terlambat'
+                        ]);
+                        $buku=Buku::find($roww->buku_id);
+
+                        $user=User::find($roww->user_id);
+                        if($user->role=='guru'){
+                            $nohp=Guru::find($user->user_id)->nohp;
+                        }elseif($user->role=='siswa'){
+                            $nohp=Siswa::find($user->user_id)->nohp;
+                        }elseif($user->role=='kaperpus'){
+                            $nohp=Kaperpus::find($user->user_id)->nohp;
+                        }elseif($user->role=='admin'){
+                            $nohp=Admin::find($user->user_id)->nohp;
+                        }
+
+                        Http::asForm()->post('https://app.whacenter.com/api/send',[
+                            'device_id'=>'9326476ab398d8c7c6195ab3442e129a',
+                            'number'=>$nohp,
+                            'message'=>'E-Perpustakaan SMA Negeri 8 Merangin : Anda terlambat mengembalikan buku '.$buku->judul.' dengan kode buku '.$buku->kode_buku.'.',
                         ]);
 
                     }
